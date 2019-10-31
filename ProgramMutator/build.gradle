@@ -24,7 +24,7 @@ dependencies {
 }
 
 jar {
-    baseName = 'HtmlColor'
+    baseName = 'ProgramMutator'
 }
 
 test {
