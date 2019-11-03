@@ -16,6 +16,13 @@ class MutationTestState {
 	List<Mutant> dead;
 	List<Mutant> allMutants;
 	
+	MutationTestState(List<Mutant> alive, List<Mutant> dead, List<Mutant> allMutants)
+	{
+		this.alive = new ArrayList<Mutant> ();
+		this.dead = new ArrayList<Mutant> ();
+		this.allMutants = new ArrayList<Mutant> ();
+	}
+	
 	void killMutant(Mutant m)
 	{
 		//change mutant status to dead

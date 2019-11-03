@@ -23,7 +23,7 @@ class Mutant {
 		this.id = 0;
 		this.status = "live";
 		this.viable = true;
-		this.mutationList = new LinkedList<MutationGenerator.Mutation> ();
+		this.mutationList = new ArrayList<MutationGenerator.Mutation> ();
 	}
 	
 	int getId()
