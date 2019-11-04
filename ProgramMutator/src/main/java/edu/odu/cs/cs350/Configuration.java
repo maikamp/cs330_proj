@@ -31,6 +31,7 @@ class Configuration {
 	 * @return True on success. False on failure or if no configuration file is
 	 *         found.
 	 */
+	// need to fix for directory setup
 	static Boolean setToConfigFileValues(Properties prop, String path) {
 		try {
 			FileReader reader = new FileReader(path);

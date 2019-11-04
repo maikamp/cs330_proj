@@ -12,7 +12,7 @@ import org.apache.commons.cli.ParseException;
 public class ProgramMutator {
 	
 	static String desc = "this is a string";	
-	static String DEMOPATH = "E:\\Documents\\Eclipse\\Example-3";
+	static final String DEMOPATH = "E:\\Documents\\Eclipse\\Example-3";
 	static Properties config = new Properties();
 	
 	  public static void main(String[] args) {
