@@ -12,11 +12,12 @@ class MutationGenerator {
  * looks like we need an ADT for mutations in order to hold them in a collection. I've 
  * added one in this class, but we can move it if it seems more appropriate elsewhere. -Mike
  */
-	class Mutation{
+	static class Mutation{
 		String mutOperator; //we could also use an int to identify the type of change made, e.g. the mutation -Mike
+		
 		Mutation(String mutOperator)
 		{
-			this.mutOperator = "";
+			this.mutOperator = mutOperator;
 		}
 		
 	}
