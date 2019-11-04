@@ -2,61 +2,61 @@
 //Generates mutants while test is running
 //The mutations generated are stored in “mutations” from the Mutant class
 class MutationGenerator {
-getArthmeticOperator() -> Collection
-getArthmeticOperator() -> Collection
-getConstantOperator() -> Collection
-getVariableOperator() -> Collection
-generateMutants(MutationOperator mop, goldCode g)
+    getArthmeticOperator() - > Collection
+    getArthmeticOperator() - > Collection
+    getConstantOperator() - > Collection
+    getVariableOperator() - > Collection
+    generateMutants(MutationOperator mop, goldCode g)
 }
 //Stores and outputs operators to use in test
 //The collection of mutations go to the MutationGenerator class where they are used in test
 class MutationOperator {
-ArithmeticOperators: Collection
-BooleanExpressionOperators: Collection
-ConstantOperators: Collection
-VariableOperators: Collection
-MutationOperator(Operator o)
+    ArithmeticOperators: Collection
+    BooleanExpressionOperators: Collection
+    ConstantOperators: Collection
+    VariableOperators: Collection
+    MutationOperator(Operator o)
 }
 //Stores mutations and generates test based on those mutations
 class Mutant {
-id: int
-mutations: Collection
-getChanges() -> Collection
-Description of mutant - mutant.tostring()
+    id: int
+    mutations: Collection
+    getChanges() - > Collection
+    Description of mutant - mutant.tostring()
 }
 //Source files to run tests on
 class TestSuite {
-sourceFiles: Collection
+    sourceFiles: Collection
 }
 //Runs test and returns results
 class TestRunner {
-baseTest() -> boolean //Test GoldVersion code to ensure with works properly before running tests
-runArithmeticSequence() -> Collection //Runs all arithmetic mutants and returns results
-runBooleanSequence() -> Collection//Runs all boolean mutants and returns results
-runConstantsSequence() -> Collection//Runs all constant mutants and returns results
-runVariableSequence() -> Collection//Runs all Variable mutants and returns results
+    baseTest() - > boolean //Test GoldVersion code to ensure with works properly before running tests
+    runArithmeticSequence() - > Collection //Runs all arithmetic mutants and returns results
+    runBooleanSequence() - > Collection //Runs all boolean mutants and returns results
+    runConstantsSequence() - > Collection //Runs all constant mutants and returns results
+    runVariableSequence() - > Collection //Runs all Variable mutants and returns results
 }
 //Stores test results of all mutation test
 class MutationTestState {
-alive: Collection
-dead: Collection
-entirePool: Collection
-killMutant(Mutant m)
-getLiveMutants() -> toString(Collection)
-getSuccessRate() -> Value
+    alive: Collection
+    dead: Collection
+    entirePool: Collection
+    killMutant(Mutant m)
+    getLiveMutants() - > toString(Collection)
+    getSuccessRate() - > Value
 }
 //configuration of current build, where the program stores its working directory info
 class Configuration {
-buildCommand: String
-testsLocation: String
-goldCodeLocation: String
-setBuildCommand(String s)
-setTestsLocation(String s)
-setGoldCodeLocation(String s)
+    buildCommand: String
+    testsLocation: String
+    goldCodeLocation: String
+    setBuildCommand(String s)
+    setTestsLocation(String s)
+    setGoldCodeLocation(String s)
 }
-Class goldCode{
-sourceFiles: Collection
-goldCode() -> Collection
-storeGoldCode(Configuration c)
-}
-**/
+Class goldCode {
+    sourceFiles: Collection
+    goldCode() - > Collection
+    storeGoldCode(Configuration c)
+} **
+/
