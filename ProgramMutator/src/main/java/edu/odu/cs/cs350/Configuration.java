@@ -1,5 +1,6 @@
 package edu.odu.cs.cs350;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -32,7 +33,9 @@ class Configuration {
 	 *         found.
 	 */
 	// need to fix for directory setup
-	static Boolean setToConfigFileValues(Properties prop, String path) {
+	static Boolean setToConfigFileValues(Properties prop, String dirPath) {
+		 File path = new File(dirPath, "mutation.settings");
+		
 		try {
 			FileReader reader = new FileReader(path);
 			prop.load(reader);

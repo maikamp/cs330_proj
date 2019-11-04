@@ -30,13 +30,20 @@ class GoldCode {
 		jParser = new JavaParser();
 	}
 	
+	GoldCode(String path){
+		sourceDirectory = new File(path);
+		jParser = new JavaParser();
+		sourceCode = new ArrayList<CompilationUnit>();
+		try {
+			loadSourceCode();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
+		}
+	}
+	
 	
 	/**
-	this isn't gonna work right.
-	at a minimum, it's going to ignore files in subdirectories.
-	 * @return
-	 * number of items in source code list,
-	 * or -1 on failure
 	 */
 	void addToSourceCode(Path file) {
 		
@@ -62,7 +69,11 @@ class GoldCode {
 	
 	
 	
-	int loadSourceCode() {
+	List<CompilationUnit> loadSourceCode() throws IOException {
+		if(!sourceDirectory.exists()) {
+			String message = "Error: No directory found at '" + sourceDirectory.toString()+ "'";
+			throw new IOException(message);
+		}
 		Path start = sourceDirectory.toPath();
 		 try {
 			Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
@@ -84,13 +95,14 @@ class GoldCode {
 			         }
 			     }
 			 });
-		} catch (IOException e) {
+		} 
+		 catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-		return 803;
+		return sourceCode;
 	}
 	
 	List<CompilationUnit> getSourceCode(){
