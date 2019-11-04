@@ -15,12 +15,12 @@ generateMutants(MutationOperator mop, goldCode g)
 	
 	for (int i=0; i<100; i++) {
 		
-		int random = (int)(Math.random()*100000);
+		int random = (int)(Math.random()*10000);
 		mutantArray[i]=  random;
 		System.out.print(random);
 		
 		
-		/// Basic array to generate mutant IDs ranging from 1-100000
+		/// Basic array to generate mutant IDs ranging from 1-10000
 	}
 	
 	
