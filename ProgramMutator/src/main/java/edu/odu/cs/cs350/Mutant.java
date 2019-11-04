@@ -18,12 +18,39 @@ class Mutant {
 	boolean viable; //may be unnecessary if we discard non-viable mutants upon generation
 	List<MutationGenerator.Mutation> mutationList; //collection of mutations applied to this mutant
 	
-	Mutant(int id, String status, boolean viable, List<MutationGenerator.Mutation> mutationList)
+	Mutant()
 	{
 		this.id = 0;
 		this.status = "live";
 		this.viable = true;
 		this.mutationList = new ArrayList<MutationGenerator.Mutation> ();
+	}
+	
+	Mutant(int id, String status, boolean viable, List<MutationGenerator.Mutation> mutationList)
+	{
+		this.id = id;
+		this.status = status;
+		this.viable = viable;
+		this.mutationList = new ArrayList<MutationGenerator.Mutation> (mutationList);
+	}
+	void setId(int newId)
+	{
+		
+	}
+	
+	void setStatus(String newStatus)
+	{
+		
+	}
+	
+	void setViable(boolean newViable)
+	{
+		
+	}
+	
+	void addMutations(List<MutationGenerator.Mutation> newMutList)
+	{
+		
 	}
 	
 	int getId()
