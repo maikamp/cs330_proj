@@ -15,7 +15,7 @@ generateMutants(MutationOperator mop, goldCode g)
 	
 	for (int i=0; i<100; i++) {
 		
-		int random = (int)(Math.random()*10000o);
+		int random = (int)(Math.random()*100000);
 		mutantArray[i]=  random;
 		System.out.print(random);
 		
