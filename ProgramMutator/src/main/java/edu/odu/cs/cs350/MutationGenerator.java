@@ -13,22 +13,21 @@ class MutationGenerator {
  * added one in this class, but we can move it if it seems more appropriate elsewhere. -Mike
  */
 <<<<<<< HEAD
+
+
+
+
 	
 	int id;
 	int mutantArray[]; 
 	
-	
 	for (int i=0; i<100; i++) {
 		
-		int random = (int)(Math.random()*100000);
+		int random = (int)(Math.random()*10);
 		mutantArray[i]=  random;
-		System.out.print(random);
-		
-		
+		System.out.print("Mutant ID: " + random);
 		/// Basic array to generate mutant IDs ranging from 1-10000o
 	}
-	
-	
 	
 	
 =======
