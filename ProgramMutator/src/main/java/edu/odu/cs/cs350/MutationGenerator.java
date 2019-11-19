@@ -1,8 +1,6 @@
 package edu.odu.cs.cs350;
 import java.util.*;
 
-
-
 class MutationGenerator(MutationOperator mop, GoldCode g) {
 /**
  * getArthmeticOperator() -> Collection
@@ -17,9 +15,7 @@ class MutationGenerator(MutationOperator mop, GoldCode g) {
  */
 <<<<<<< HEAD
 
-Mutant mutantGenerator = new Mutant();
-
-
+Mutant mutantGenerator = new Mutant(); ///here it is not recognizing class mutant 
 
 	int id;
 	String status;
@@ -27,14 +23,10 @@ Mutant mutantGenerator = new Mutant();
 
 	for (int i=0; i<100; i++) {
 		
+		int random = (int)(Math.random()*100);
+		mutantGenerator.setid(random);
+
 		
-		mutantGenerator.
-		
-		
-	
-	
-	
-	
 	}
 	
 
