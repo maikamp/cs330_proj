@@ -14,10 +14,26 @@ class MutationGenerator {
 	 */
 		int id;
 		int mutantArray[] = new int[100];
+		int arithmeticMutantArray[] = new int[100];
 		
 		MutationGenerator(){
 			generateMutants();
 		}
+		
+		//Generates Arithmetic Operators:
+		//Uses a random number to pull a number from MutantArray 
+		//Which is used to select one of 5 operators
+		//And pushed into arithmeticMutantArray
+		
+		void generateArithmeticOperator() {
+			for(int i = 0; i<100; i++) {
+				int random = (int)(Math.random()*100);
+				char ArithmeticOps[] = {'+','-','*','/','%','+','-','*','/','%'};
+				arithmeticMutantArray[i] = ArithmeticOps[mutantArray[random]];
+			}
+		}
+		
+		//Generates Random Numbers Corresponding to Operators
 		
 		void generateMutants() {
 			for (int i=0; i<100; i++) {

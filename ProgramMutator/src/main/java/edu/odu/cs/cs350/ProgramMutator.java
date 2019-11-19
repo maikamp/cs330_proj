@@ -30,15 +30,19 @@ public class ProgramMutator {
 			    	Configuration.setToDefaultValues(config);	
 			    }
 			    //System.err.println(config);
+			    
+			    //Get gold code
 			    GoldCode goldCode = new GoldCode(dirPath);
 			    System.out.println("Gold Suite Files: " + goldCode.getSourceCode().size());
-			    
+			    //Get test code
 			    TestSuite testCode = new TestSuite(dirPathTest);
 			    System.out.println("TestSuite Files: " + testCode.getSourceCode().size());
-			    
+			    //Generate Mutants for Testing
 			    MutationGenerator GeneratedMutants = new MutationGenerator();
 			    System.out.println("Generated Mutations: " + GeneratedMutants.showArrayGenerated());
-			    
+			    //Put all Mutants into MutationOperator
+			    //Run Tests
+			    //
 			    
 		    } catch (ArrayIndexOutOfBoundsException e) {
 		    	System.out.println("<name> : Missing operand");
