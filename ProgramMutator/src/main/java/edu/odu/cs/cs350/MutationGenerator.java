@@ -25,7 +25,7 @@ Mutant mutantGenerator = new Mutant(); ///here it is not recognizing class mutan
 		
 		int random = (int)(Math.random()*100);
 		mutantGenerator.setid(random);
-
+/// left off here
 		
 	}
 	
