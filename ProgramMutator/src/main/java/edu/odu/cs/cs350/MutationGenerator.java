@@ -1,6 +1,9 @@
 package edu.odu.cs.cs350;
+import java.util.*;
 
-class MutationGenerator {
+
+
+class MutationGenerator(MutationOperator mop, GoldCode g) {
 /**
  * getArthmeticOperator() -> Collection
  * getArthmeticOperator() -> Collection
@@ -14,11 +17,32 @@ class MutationGenerator {
  */
 <<<<<<< HEAD
 
+Mutant mutantGenerator = new Mutant();
+
+
+
+	int id;
+	String status;
+	boolean viable;
+
+	for (int i=0; i<100; i++) {
+		
+		
+		mutantGenerator.
+		
+		
+	
+	
+	
+	
+	}
+	
 
 
 
 	
-	int id;
+	
+	/* int id;
 	int mutantArray[]; 
 	
 	for (int i=0; i<100; i++) {
@@ -27,7 +51,7 @@ class MutationGenerator {
 		mutantArray[i]=  random;
 		System.out.print("Mutant ID: " + random);
 		/// Basic array to generate mutant IDs ranging from 1-10000o
-	}
+	 /* }
 	
 	
 =======
