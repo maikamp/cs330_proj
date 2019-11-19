@@ -24,15 +24,22 @@ public class ProgramMutator {
 
 		    try {
 		     	CommandLine cmd = parser.parse(options, args);
-		     	String dirPath = cmd.getArgs()[0];
-
+		     	String dirPath = "C:/Users/User/Downloads/JUnit/JUnit/Example-2/src/main/java/edu/odu/cs/cs350/examples/";
+		     	String dirPathTest = "C:/Users/User/Downloads/JUnit/JUnit/Example-2/src/test/java/edu/odu/cs/cs350/examples/";
 			    if (!Configuration.setToConfigFileValues(config, dirPath)) {
 			    	Configuration.setToDefaultValues(config);	
 			    }
 			    //System.err.println(config);
 			    GoldCode goldCode = new GoldCode(dirPath);
-			    System.err.println(goldCode.getSourceCode().size());
-
+			    System.out.println("Gold Suite Files: " + goldCode.getSourceCode().size());
+			    
+			    TestSuite testCode = new TestSuite(dirPathTest);
+			    System.out.println("TestSuite Files: " + testCode.getSourceCode().size());
+			    
+			    MutationGenerator GeneratedMutants = new MutationGenerator();
+			    System.out.println("Generated Mutations: " + GeneratedMutants.showArrayGenerated());
+			    
+			    
 		    } catch (ArrayIndexOutOfBoundsException e) {
 		    	System.out.println("<name> : Missing operand");
 				//System.out.println("Try '<name> --help' for more information.");
