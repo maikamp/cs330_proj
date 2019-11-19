@@ -16,7 +16,7 @@ class MutationGenerator(MutationOperator mop, GoldCode g) {
  */
 <<<<<<< HEAD
 
-Mutant mutantGenerator = new Mutant(); ///here it is not recognizing class mutant 
+ Mutant mutantGenerator = new Mutant(); ///here it is not recognizing class mutant 
 
 	int id;
 	String status;
@@ -24,9 +24,28 @@ Mutant mutantGenerator = new Mutant(); ///here it is not recognizing class mutan
 
 	for (int i=0; i<100; i++) {
 		
-		int random = (int)(Math.random()*100);
-		mutantGenerator.setid(random);
-/// left off here
+		int r = (int)(Math.random()*100);
+		mutantGenerator.setID(r); ///set mutant ID
+		
+			mutantGenerator.setStatus("alive"); /// set status 
+			
+			if(mutantGenerator.viable=true) {
+				
+			}else 
+				
+				
+				
+			
+			}
+	
+			
+			
+			
+		
+			
+		
+			
+
 		
 	}
 	
