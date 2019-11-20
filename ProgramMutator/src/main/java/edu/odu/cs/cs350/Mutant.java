@@ -35,22 +35,22 @@ class Mutant {
 	}
 	void setId(int newId)
 	{
-		
+		this.id = newId;
 	}
 	
 	void setStatus(String newStatus)
 	{
-		
+		this.status = newStatus;
 	}
 	
 	void setViable(boolean newViable)
 	{
-		
+		this.viable = newViable;
 	}
 	
 	void addMutations(List<MutationGenerator.Mutation> newMutList)
 	{
-		
+		this.mutationList = newMutList;
 	}
 	
 	int getId()
