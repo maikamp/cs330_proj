@@ -55,15 +55,15 @@ class MutationGenerator {
 			im not sure why this was removed, but I believe it needs to be somewhere. 
 			I suppose we could just have it as a string variable held in the collection 
 			of mutations for each mutant, but we should discuss those options before removing.
+			It's definitely not comeplete--it needs the assignment fixed 
 			-Mike
 		*/
 		static class Mutation{
 			String mutOperator; 
 			
-			Mutation(String mutOperator)
+			Mutation(String mutOp)
 			{
-				this.mutOperator = "";
-				this.mutOperator = mutOperator;
+				this.mutOperator = mutOp;
 			}
 		
 		}
