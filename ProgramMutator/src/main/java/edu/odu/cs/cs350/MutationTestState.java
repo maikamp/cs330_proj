@@ -29,15 +29,22 @@ class MutationTestState {
 	
 	void killMutant(Mutant m)
 	{
-		//change mutant status to dead
+		m.setStatus("dead");
 	}
 	
 	void getLiveMutants()
 	{
-		//print list of live mutants
+		for(Mutant currentMutant : this.alive)
+		{
+			System.out.println(currentMutant.toString());
+		}
 	}
 	void getSuccessRate()
 	{
-		//print % = dead/allMutants
+		int liveMuts = this.alive.size();
+		int allMuts = this.allMutants.size();
+		double rate = 1 - (liveMuts/allMuts);
+		System.out.println("Success Rate:\n" + liveMuts + " of " + allMuts + " are still alive."
+				+ "\nThe given tests only successfully removed " + rate + "% of the viable mutants.");
 	}
 }
