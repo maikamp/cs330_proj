@@ -41,7 +41,7 @@ class TestRunner {
 			}
 		}
 	}
-	void TestCase(Mutant workingSet) {
+	void TestCase(Mutant workingSetA) {
 			try {
 	            int result = 0; //Result of compiling code
 	        } catch ( Exception e ) {
