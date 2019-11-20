@@ -51,4 +51,21 @@ class MutationGenerator {
 			}
 			return nums;
 		}
+		/*
+			im not sure why this was removed, but I believe it needs to be somewhere. 
+			I suppose we could just have it as a string variable held in the collection 
+			of mutations for each mutant, but we should discuss those options before removing.
+			-Mike
+		*/
+		static class Mutation{
+			String mutOperator; 
+			
+			Mutation(String mutOperator)
+			{
+				this.mutOperator = "";
+				this.mutOperator = mutOperator;
+			}
+		
+		}
+		
 	}
