@@ -5,7 +5,7 @@ import java.util.Properties;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
+// import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -24,29 +24,38 @@ public class ProgramMutator {
 
 		    try {
 		     	CommandLine cmd = parser.parse(options, args);
-		     	String dirPath = "C:/Users/User/Downloads/JUnit/JUnit/Example-2/src/main/java/edu/odu/cs/cs350/examples/";
-		     	String dirPathTest = "C:/Users/User/Downloads/JUnit/JUnit/Example-2/src/test/java/edu/odu/cs/cs350/examples/";
+		     	String dirPath = cmd.getArgs()[0];
+		     	String dirPathTest = dirPath + "/src/test/java";
 			    if (!Configuration.setToConfigFileValues(config, dirPath)) {
 			    	Configuration.setToDefaultValues(config);	
 			    }
 			    //System.err.println(config);
+			   
+			    //pull test state hereabouts?
+			    if( cmd.hasOption( "describe" ) ) {
+			    	//System.out.println( MutationTestState.getMutantById(cmd.getOptionValue( "describe" ).toString()));			    	
+			    }
+			    if( cmd.hasOption( "list" ) ) {
+			        //System.out.println( MutationTestState.getLiveMutants() );
+			    }
 			    
 			    //Get gold code
 			    GoldCode goldCode = new GoldCode(dirPath);
-			    System.out.println("Gold Suite Files: " + goldCode.getSourceCode().size());
+			    System.out.println("Gold Files: " + goldCode.getSourceCode().size());
 			    //Get test code
 			    TestSuite testCode = new TestSuite(dirPathTest);
 			    System.out.println("TestSuite Files: " + testCode.getSourceCode().size());
 			    //Generate Mutants for Testing
-			    MutationGenerator GeneratedMutants = new MutationGenerator();
+			    MutantGenerator GeneratedMutants = new MutantGenerator();
 			    System.out.println("Generated Mutations: " + GeneratedMutants.showArrayGenerated());
 			    //Put all Mutants into MutationOperator
 			    //Run Tests
 			    //
 			    
+			    
 		    } catch (ArrayIndexOutOfBoundsException e) {
 		    	System.out.println("<name> : Missing operand");
-				//System.out.println("Try '<name> --help' for more information.");
+				System.out.println("Try '<name> --help' for more information.");
 		    } catch (ParseException e) {
 		        System.err.println(e);
 		    }
@@ -65,22 +74,20 @@ public class ProgramMutator {
 		    		.argName("path")
 		    		.build();
 		    options.addOption(goldloc);		    
-//		    
-//		    Option buildtarget = Option.builder("t")
-//		    		.longOpt("buildtarget")
-//		    		.desc("set the gradle build target to compile without testing")
-//		    		.hasArg()
-//		    		.argName("path")
-//		    		.build();
-//		    options.addOption(buildtarget);
-//		    
-//		    Option stateloc = Option.builder("s")
-//		    		.longOpt("stateloc")
-//		    		.desc("set the location of project state information")
-//		    		.hasArg()
-//		    		.argName("path")
-//		    		.build();
-//		    options.addOption(stateloc);
+		    
+		    Option describe = Option.builder("d")
+		    		.longOpt("describe")
+		    		.desc("get a description of a mutant")
+		    		.hasArg()
+		    		.argName("mutantId")
+		    		.build();
+		    options.addOption(describe);
+		    
+		    Option list = Option.builder("l")
+		    		.longOpt("list")
+		    		.desc("list all live mutants")
+		    		.build();
+		    options.addOption(list);
 		    
 		    return options;
 		}
