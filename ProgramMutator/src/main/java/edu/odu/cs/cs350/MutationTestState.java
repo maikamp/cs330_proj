@@ -20,7 +20,7 @@ class MutationTestState {
 	List<Mutant> dead;
 	List<Mutant> allMutants; // may be unnecessary 
 	
-	MutationTestState(List<Mutant> alive, List<Mutant> dead, List<Mutant> allMutants)
+	MutationTestState()
 	{
 		this.alive = new ArrayList<Mutant> ();
 		this.dead = new ArrayList<Mutant> ();
@@ -43,7 +43,7 @@ class MutationTestState {
 	
 	void killMutant(Mutant m)
 	{
-		m.setAlive(false); //change to boolean
+		m.setAlive(false); 
 		//add to dead collection
 		if (dead.contains(m))
 		{
