@@ -14,26 +14,21 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 
-/**
-sourceFiles: Collection
-TestSuite() -> Collection
-storeTestSuite(Configuration c)
- */
 class TestSuite {
 	
 	private File sourceDirectory;
-	private List<CompilationUnit> sourceCode;
+	private List<CompilationUnit> testCode;
 	private JavaParser jParser;
 	
 	TestSuite(){
-		sourceCode = new ArrayList<CompilationUnit>();
+		testCode = new ArrayList<CompilationUnit>();
 		jParser = new JavaParser();
 	}
 	
 	TestSuite(String path){
 		sourceDirectory = new File(path);
 		jParser = new JavaParser();
-		sourceCode = new ArrayList<CompilationUnit>();
+		testCode = new ArrayList<CompilationUnit>();
 		try {
 			loadSourceCode();
 		} catch (IOException e) {
@@ -51,7 +46,7 @@ class TestSuite {
 		try {
 			parseUnit = jParser.parse(file);
 			if (parseUnit.isSuccessful()) {
-				sourceCode.add(parseUnit.getResult().get());
+				testCode.add(parseUnit.getResult().get());
 			}
 		} catch (IOException e) {
 			System.err.println(e);
@@ -102,11 +97,11 @@ class TestSuite {
 		}
 		
 		
-		return sourceCode;
+		return testCode;
 	}
 	
 	List<CompilationUnit> getSourceCode(){
-		return this.sourceCode;
+		return this.testCode;
 	}
 }
 
