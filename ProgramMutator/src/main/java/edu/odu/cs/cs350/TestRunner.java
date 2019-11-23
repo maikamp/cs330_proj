@@ -18,18 +18,6 @@ class TestRunner {
 		this.goldCode = gc;
 		this.testSuite = ts;
 		this.Mutations = mts;
-		filterMutations();
-	}
-	
-	void filterMutations(){
-		for(int i = 0; i<Mutations.size(); i++) {
-			Mutant My_muto = Mutations.get(i);
-			if(My_muto.getViability()) {
-				ValidMutations.add(My_muto);
-			}else {
-				InvalidMutations.add(My_muto);
-			}
-		}
 	}
 	
 	void RunTest() {
