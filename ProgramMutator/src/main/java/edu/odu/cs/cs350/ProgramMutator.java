@@ -5,10 +5,10 @@ import java.util.Properties;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-// import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+//import org.apache.commons.cli.HelpFormatter;
 
 public class ProgramMutator {
 
@@ -31,12 +31,13 @@ public class ProgramMutator {
 			    }
 			    //System.err.println(config);
 			   
-			    //pull test state hereabouts?
+			    MutationTestState state = new MutationTestState();
+			    
 			    if( cmd.hasOption( "describe" ) ) {
-			    	//System.out.println( MutationTestState.getMutantById(cmd.getOptionValue( "describe" ).toString()));			    	
+			    	System.out.println( state.getMutantByID(Integer.parseInt(cmd.getOptionValue( "describe" ))));			    	
 			    }
 			    if( cmd.hasOption( "list" ) ) {
-			        //System.out.println( MutationTestState.getLiveMutants() );
+			       state.printLiveMutants();
 			    }
 			    
 			    //Get gold code
@@ -46,7 +47,7 @@ public class ProgramMutator {
 			    TestSuite testCode = new TestSuite(dirPathTest);
 			    System.out.println("TestSuite Files: " + testCode.getSourceCode().size());
 			    //Generate Mutants for Testing
-			    MutantGenerator GeneratedMutants = new MutantGenerator();
+			    MutationGenerator GeneratedMutants = new MutationGenerator();
 			    System.out.println("Generated Mutations: " + GeneratedMutants.showArrayGenerated());
 			    //Put all Mutants into MutationOperator
 			    //Run Tests
@@ -56,7 +57,10 @@ public class ProgramMutator {
 		    } catch (ArrayIndexOutOfBoundsException e) {
 		    	System.out.println("<name> : Missing operand");
 				System.out.println("Try '<name> --help' for more information.");
-		    } catch (ParseException e) {
+		    } catch(IndexOutOfBoundsException e) {
+		    	System.out.println("Invalid mutant ID");
+		    }
+		    catch (ParseException e) {
 		        System.err.println(e);
 		    }
 		  }
@@ -66,15 +70,7 @@ public class ProgramMutator {
 			Options options = new Options();
 		    options.addOption("c", "cleanconfig", false, "reset the configuration file to default values");
 		    options.addOption("h", "help", false, "print this message");
-		    
-		    Option goldloc = Option.builder("g")
-		    		.longOpt("goldloc")
-		    		.desc("set the location of gold version source code")
-		    		.hasArg()
-		    		.argName("path")
-		    		.build();
-		    options.addOption(goldloc);		    
-		    
+
 		    Option describe = Option.builder("d")
 		    		.longOpt("describe")
 		    		.desc("get a description of a mutant")
