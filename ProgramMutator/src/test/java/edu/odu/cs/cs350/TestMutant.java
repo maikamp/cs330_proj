@@ -15,22 +15,21 @@ public class TestMutant {
 	
 	Mutant testDefaultMutant;
 	Mutant testInputValuesMutant;
-	List<MutationGenerator.Mutation> mList0 = new ArrayList<MutationGenerator.Mutation>();
-	List<MutationGenerator.Mutation> mList1 = new ArrayList<MutationGenerator.Mutation>();
+	List<MutationOperator> mList0 = new ArrayList<MutationOperator>();
+	List<MutationOperator> mList1 = new ArrayList<MutationOperator>();
 	
 	@Before
 	public void setUp()
 	{
 		testDefaultMutant = new Mutant();
-		testInputValuesMutant = new Mutant(25, "dead", false, mList0);
+		testInputValuesMutant = new Mutant(25, false, mList0);
 	}
 	
 	@Test
 	public void testDefaultMutantConstructor()
 	{
 		assertThat(testDefaultMutant.id, is(0));
-		assertThat(testDefaultMutant.status, is("live"));
-		assertThat(testDefaultMutant.viable, is(true));
+		assertThat(testDefaultMutant.alive, is("live"));
 		//assertThat(testDefaultMutant.mutationList, is(something));
 	}
 	
@@ -38,8 +37,7 @@ public class TestMutant {
 	public void testInputValuesMutantConstructor()
 	{
 		assertThat(testInputValuesMutant.id, is(25));
-		assertThat(testInputValuesMutant.status, is("dead"));
-		assertThat(testInputValuesMutant.viable, is(false));
+		assertThat(testInputValuesMutant.alive, is("dead"));
 		//assertThat(testInputValuesMutant.mutationList, is(something));
 	}
 	
@@ -56,30 +54,20 @@ public class TestMutant {
 	@Test
 	public void testSetStatus()
 	{
-		testDefaultMutant.setStatus("dead");
-		assertThat(testDefaultMutant.status, is("dead"));
+		testDefaultMutant.setAlive(false);
+		assertThat(testDefaultMutant.alive, is("dead"));
 		
-		testInputValuesMutant.setStatus("live");
-		assertThat(testInputValuesMutant.status, is("live"));
+		testInputValuesMutant.setAlive(true);
+		assertThat(testInputValuesMutant.alive, is("live"));
 	}
-	
-	@Test
-	public void testSetViable()
-	{
-		testDefaultMutant.setViable(false);
-		assertThat(testDefaultMutant.viable, is(false));
-		
-		testInputValuesMutant.setViable(true);
-		assertThat(testInputValuesMutant.viable, is(true));
-	}
-	
+
 	@Test
 	public void testAddMutations()
 	{
 		testDefaultMutant.addMutations(mList1);
-		assertThat(testDefaultMutant.mutationList, is(mList1));
+		assertThat(testDefaultMutant.mutations, is(mList1));
 		
 		testInputValuesMutant.addMutations(mList1);
-		assertThat(testInputValuesMutant.mutationList, is(mList1));
+		assertThat(testInputValuesMutant.mutations, is(mList1));
 	}
 }

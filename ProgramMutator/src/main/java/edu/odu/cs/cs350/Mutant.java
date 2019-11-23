@@ -14,43 +14,36 @@ class Mutant {
 	Description of mutant <- mutant.tostring()
 	**/
 	int id;
-	String status;
-	boolean viable; //may be unnecessary if we discard non-viable mutants upon generation
-	List<MutationGenerator.Mutation> mutationList; //collection of mutations applied to this mutant
+	boolean alive;
+	List<MutationOperator> mutations; //collection of mutationOperators applied to this mutant
 	
 	Mutant()
 	{
 		this.id = 0;
-		this.status = "live";
-		this.viable = true;
-		this.mutationList = new ArrayList<MutationGenerator.Mutation> ();
+		this.alive = true; //change to boolean
+		this.mutations = new ArrayList<MutationOperator> ();
 	}
 	
-	Mutant(int id, String status, boolean viable, List<MutationGenerator.Mutation> mutationList)
+	Mutant(int id, boolean status, List<MutationOperator> mutationList) //change mutations to mutation operation
 	{
 		this.id = id;
-		this.status = status;
-		this.viable = viable;
-		this.mutationList = new ArrayList<MutationGenerator.Mutation> (mutationList);
+		this.alive = status;
+		this.mutations = new ArrayList<MutationOperator> (mutationList);
 	}
+	
 	void setId(int newId)
 	{
 		this.id = newId;
 	}
 	
-	void setStatus(String newStatus)
+	void setAlive(boolean newStatus)
 	{
-		this.status = newStatus;
+		this.alive = newStatus;
 	}
 	
-	void setViable(boolean newViable)
+	void addMutations(List<MutationOperator> newMutList)
 	{
-		this.viable = newViable;
-	}
-	
-	void addMutations(List<MutationGenerator.Mutation> newMutList)
-	{
-		this.mutationList = newMutList;
+		this.mutations = newMutList;
 	}
 	
 	int getId()
@@ -58,28 +51,32 @@ class Mutant {
 		return this.id;
 	}
 	
-	String getStatus() 
+	boolean isAlive()
 	{
-		return this.status;
+		return this.alive;
 	}
 	
-	boolean getViability()
-	{
-		return this.viable;
-	}
-	
-	// accessor for mutationList, returns list of mutations as string
+	// accessor for mutations, returns list of mutations as string
 	// maybe returning the list itself is preferable with <Mutation> List<MutationGenerator.Mutation> as the type
 	String getMutations() {
 		
-		return this.mutationList.toString();
+		return this.mutations.toString();
 	}
 	
 	//@Override
 	public String toString()
 	{
-		return ("Mutant ID: " + this.getId() + "\nMutant Status: " + this.getStatus() + 
-				"\nMutant Viability: " + this.getViability() + "\nMutations: " + this.getMutations());
+		String isAlive;
+		if (this.isAlive())
+		{
+			isAlive = new String("live");
+		}
+		else
+		{
+			isAlive = new String("dead");
+		}
+		return ("Mutant ID: " + this.getId() + "\nMutant Status: " + isAlive + 
+				"\nMutations: " + this.getMutations());
 	}
 	 
 }
