@@ -1,0 +1,14 @@
+stages:
+  - build
+  - deploy
+
+
+build-job:
+  tags:
+    - 93da6563
+  stage: build
+  script:
+    - ./ProgramMutator/
+    - ./gradlew build
+  only:
+    - master
