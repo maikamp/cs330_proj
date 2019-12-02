@@ -25,6 +25,12 @@ public class TestMutationTestState {
 	@Test
 	public void testConstructor()
 	{
+		x = new MutationTestState();
+		y = new MutationTestState();
+		x.alive = new ArrayList<Mutant> a();
+		y.alive = new ArrayList<Mutant> b();
+		assertEquals(a,b);
+		
 		
 		
 	}
