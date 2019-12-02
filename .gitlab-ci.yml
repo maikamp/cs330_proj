@@ -5,7 +5,7 @@ stages:
 
 build-job:
   tags:
-    - 93da6563
+    - green4
   stage: build
   script:
     - ./ProgramMutator/
