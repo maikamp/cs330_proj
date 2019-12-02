@@ -13,6 +13,9 @@ import org.junit.Before;
 
 public class TestMutationTestState {
 	
+	private MutationTestState x;
+	
+	
 	@Before
 	public void setUp()
 	{
@@ -23,11 +26,15 @@ public class TestMutationTestState {
 	public void testConstructor()
 	{
 		
+		
 	}
 	
 	@Test
 	public void testKillMutant()
 	{
-		
+		boolean ans = false; 
+		x = killMutant(m);
+		assertThat(m.setAlive(ans), is(dead.add(m)));
+		assertThat(m.setAlive(ans), is(alive.remove(m)));
 	}
 }
