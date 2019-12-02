@@ -8,7 +8,7 @@ build-job:
     - green4
   stage: build
   script:
-    - ./ProgramMutator/
+    - cd ./ProgramMutator/
     - ./gradlew build
   only:
     - master
