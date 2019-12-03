@@ -61,10 +61,12 @@ class TestSuite {
 	}
 	
 	File getSourceDirectory() {
+		
 		return this.sourceDirectory;
 	}
 	
 	String getSourceDirectoryString() {
+		
 		return this.sourceDirectoryString;
 	}
 	

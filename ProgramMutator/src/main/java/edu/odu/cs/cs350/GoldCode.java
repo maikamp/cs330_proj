@@ -66,10 +66,12 @@ class GoldCode {
 	}
 	
 	File getSourceDirectory() {
+		
 		return this.sourceDirectory;
 	}
 	
 	String getSourceDirectoryString() {
+		
 		return this.sourceDirectoryString;
 	}
 	

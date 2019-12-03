@@ -65,16 +65,16 @@ class TestRunner {
 	}
 	
 	void RunTest() {
-        String sourceFilePathT = testSuite.getSourceDirectoryString();
-        String sourceFilePathC = goldCode.getSourceDirectoryString();
+        String sourceFilePathTc = testSuite.getSourceDirectoryString();
+        String sourceFilePathGc = goldCode.getSourceDirectoryString();
         
-        if (compileProgram(sourceFilePathT) != 0) {
+        if (compileProgram(sourceFilePathTc) != 0) {
             System.out.println("Compilation Failed");
             System.exit(1);
         }
 
         System.out.printf("Compilation Succeeded for %s%n",
-                          getAbsolutePath(sourceFilePathT));
+                          getAbsolutePath(sourceFilePathTc));
 	}
 	void TestCase(Mutant workingSetA) {
 			try {
