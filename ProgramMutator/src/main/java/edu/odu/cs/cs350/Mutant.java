@@ -20,7 +20,7 @@ class Mutant {
 	Mutant()
 	{
 		this.id = 0;
-		this.alive = true; //change to boolean
+		this.alive = true; 
 		this.mutations = new ArrayList<MutationOperator> ();
 	}
 	
@@ -58,9 +58,9 @@ class Mutant {
 	
 	// accessor for mutations, returns list of mutations as string
 	// maybe returning the list itself is preferable with <Mutation> List<MutationGenerator.Mutation> as the type
-	String getMutations() {
+	List<MutationOperator> getMutations() {
 		
-		return this.mutations.toString();
+		return this.mutations;
 	}
 	
 	//@Override

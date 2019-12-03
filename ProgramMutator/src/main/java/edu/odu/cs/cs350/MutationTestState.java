@@ -18,7 +18,7 @@ class MutationTestState {
 	
 	List<Mutant> alive;
 	List<Mutant> dead;
-	List<Mutant> allMutants; // may be unnecessary 
+	List<Mutant> allMutants;
 	
 	MutationTestState()
 	{

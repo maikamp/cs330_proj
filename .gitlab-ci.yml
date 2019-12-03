@@ -1,0 +1,14 @@
+stages:
+  - build
+  - deploy
+
+
+build-job:
+  tags:
+    - green4
+  stage: build
+  script:
+    - cd ./ProgramMutator/
+    - ./gradlew build
+  only:
+    - master
