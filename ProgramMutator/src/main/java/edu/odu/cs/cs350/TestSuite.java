@@ -16,6 +16,7 @@ import com.github.javaparser.ast.CompilationUnit;
 
 class TestSuite {
 	
+	private String sourceDirectoryString;
 	private File sourceDirectory;
 	private List<CompilationUnit> testCode;
 	private JavaParser jParser;
@@ -26,6 +27,7 @@ class TestSuite {
 	}
 	
 	TestSuite(String path){
+		sourceDirectoryString = path;
 		sourceDirectory = new File(path);
 		jParser = new JavaParser();
 		testCode = new ArrayList<CompilationUnit>();
@@ -62,7 +64,9 @@ class TestSuite {
 		return this.sourceDirectory;
 	}
 	
-	
+	String getSourceDirectoryString() {
+		return this.sourceDirectoryString;
+	}
 	
 	List<CompilationUnit> loadSourceCode() throws IOException {
 		if(!sourceDirectory.exists()) {

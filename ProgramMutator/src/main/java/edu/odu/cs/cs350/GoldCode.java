@@ -21,6 +21,7 @@ storeGoldCode(Configuration c)
  */
 class GoldCode {
 	
+	private String sourceDirectoryString;
 	private File sourceDirectory;
 	private List<CompilationUnit> sourceCode;
 	private JavaParser jParser;
@@ -31,6 +32,7 @@ class GoldCode {
 	}
 	
 	GoldCode(String path){
+		sourceDirectoryString = path;
 		sourceDirectory = new File(path);
 		jParser = new JavaParser();
 		sourceCode = new ArrayList<CompilationUnit>();
@@ -67,7 +69,9 @@ class GoldCode {
 		return this.sourceDirectory;
 	}
 	
-	
+	String getSourceDirectoryString() {
+		return this.sourceDirectoryString;
+	}
 	
 	List<CompilationUnit> loadSourceCode() throws IOException {
 		if(!sourceDirectory.exists()) {
