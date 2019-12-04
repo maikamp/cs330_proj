@@ -7,20 +7,12 @@ package edu.odu.cs.cs350;
 import java.util.*;
 
 class MutationTestState {
-	/**
-	 * alive: Collection
-		dead: Collection
-		entirePool: Collection
-		killMutant(Mutant m)
-		getLiveMutants() -> toString(Collection)
-		getSuccessRate() -> Value
-	 */
-	
+
 	List<Mutant> alive;
 	List<Mutant> dead;
 	List<Mutant> allMutants;
 	
-	MutationTestState()
+	MutationTestState() //create blank mutation test state object
 	{
 		this.alive = new ArrayList<Mutant> ();
 		this.dead = new ArrayList<Mutant> ();
@@ -30,6 +22,8 @@ class MutationTestState {
 	{
 		int mIndex = 0;
 		
+	//iterate through the list of mutants and attempt to match the int ID,
+	//then set mIndex to the index of the located mutant
 		for(Mutant currentMutant : this.allMutants)
 		{
 			if (currentMutant.id == mID)
@@ -37,7 +31,7 @@ class MutationTestState {
 				mIndex = allMutants.indexOf(currentMutant);
 			}
 		}
-		
+		//return the mutant object located by the search
 		return allMutants.get(mIndex);
 	}
 	
@@ -63,6 +57,7 @@ class MutationTestState {
 			System.out.println(currentMutant.toString());
 		}
 	}
+	//prints the rate at which mutants have been killed
 	void getSuccessRate()
 	{
 		int liveMuts = this.alive.size();
