@@ -1,26 +1,14 @@
-/**
- * Author: Mike Campbell <mcampbel>
- * ODU - CS350 - Fall 2019
- */
 package edu.odu.cs.cs350;
 
 import java.util.*;
 
 class MutationTestState {
-	/**
-	 * alive: Collection
-		dead: Collection
-		entirePool: Collection
-		killMutant(Mutant m)
-		getLiveMutants() -> toString(Collection)
-		getSuccessRate() -> Value
-	 */
-	
+
 	List<Mutant> alive;
 	List<Mutant> dead;
 	List<Mutant> allMutants;
 	
-	MutationTestState()
+	MutationTestState() //create blank mutation test state object
 	{
 		this.alive = new ArrayList<Mutant> ();
 		this.dead = new ArrayList<Mutant> ();
@@ -30,6 +18,8 @@ class MutationTestState {
 	{
 		int mIndex = 0;
 		
+	//iterate through the list of mutants and attempt to match the int ID,
+	//then set mIndex to the index of the located mutant
 		for(Mutant currentMutant : this.allMutants)
 		{
 			if (currentMutant.id == mID)
@@ -37,7 +27,7 @@ class MutationTestState {
 				mIndex = allMutants.indexOf(currentMutant);
 			}
 		}
-		
+		//return the mutant object located by the search
 		return allMutants.get(mIndex);
 	}
 	
@@ -45,14 +35,14 @@ class MutationTestState {
 	{
 		m.setAlive(false); 
 		//add to dead collection
-		if (dead.contains(m))
+		if (this.dead.contains(m) == false)
 		{
-			dead.add(m);
+			this.dead.add(m);
 		}
 		//remove from alive collection
-		if (alive.contains(m))
+		if (this.alive.contains(m))
 		{
-			alive.remove(m);
+			this.alive.remove(m);
 		}
 	}
 	
@@ -63,7 +53,8 @@ class MutationTestState {
 			System.out.println(currentMutant.toString());
 		}
 	}
-	void getSuccessRate()
+	//prints the rate at which mutants have been killed
+	void printSuccessRate()
 	{
 		int liveMuts = this.alive.size();
 		int allMuts = this.allMutants.size();
@@ -72,3 +63,4 @@ class MutationTestState {
 				+ "\nThe given tests only successfully removed " + rate + "% of the viable mutants.");
 	}
 }
+
