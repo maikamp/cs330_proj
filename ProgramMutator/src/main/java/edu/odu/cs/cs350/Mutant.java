@@ -17,14 +17,14 @@ class Mutant {
 	boolean alive;
 	List<MutationOperator> mutations; //collection of mutationOperators applied to this mutant
 	
-	Mutant() //create blank mutant
+	Mutant()
 	{
 		this.id = 0;
 		this.alive = true; 
 		this.mutations = new ArrayList<MutationOperator> ();
 	}
 	
-	Mutant(int id, boolean status, List<MutationOperator> mutationList) //create mutant with parameters
+	Mutant(int id, boolean status, List<MutationOperator> mutationList) //change mutations to mutation operation
 	{
 		this.id = id;
 		this.alive = status;
@@ -64,7 +64,7 @@ class Mutant {
 	}
 	
 	//@Override
-	public String toString() //returns a formatted string of the mutant's attributes
+	public String toString()
 	{
 		String isAlive;
 		if (this.isAlive())
