@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
   - deploy
 
 
@@ -9,6 +10,6 @@ build-job:
   stage: build
   script:
     - cd ./ProgramMutator/
-    - ./gradlew build
+    - #./gradlew build
   only:
     - master
