@@ -37,15 +37,15 @@ class TestRunner {
 
         return compileProgram(absolutePath.toString(), null, null);
     }
-
+    
     /**
      * Compile a single simple (single source file) Java program.
      *
-     * @param absolutePath absolute path to file to complile
+     * @param absolutePath absolute path to file to compile
      * @param outStream destination for all "standard out" output
      * @param errStream destination for all "standard error" output
      *
-     * @return 0 if compilation was successfull, not 0 on failure
+     * @return 0 if compilation was successful, not 0 on failure
      */
     public static int compileProgram(String absolutePath,
                                      OutputStream outStream,
@@ -57,7 +57,47 @@ class TestRunner {
 
         return result;
     }
+    
+    
+    /**
+     * Compile a list of Java source files.
+     *
+     * @param pathStrings array of String representations of
+     *  absolute paths to files to compile
+     *
+     * @return 0 if compilation was successful, not 0 on failure
+     */
+    public static int compileProgram(String[] filePaths) {
+
+        return compileProgram(filePaths, null, null);
+    }
+
+    /**
+     * Compile a list of Java source files.
+     *
+     * @param pathStrings array of String representations of
+     *  absolute paths to files to compile
+     * @param outStream destination for all "standard out" output (uses default if null)
+     * @param errStream destination for all "standard error" output (uses default if null)
+     *
+     * @return 0 if compilation was successful, not 0 on failure
+     */
+    public static int compileProgram( String[] pathStrings, OutputStream outStream,
+    		OutputStream errStream)
+    {
+    		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+    		
+    		int result = 
+    				compiler.run(
+    						null,
+    						outStream,
+    						errStream,
+    						pathStrings);
+    		
+    		return result;
+    	}
 	
+    
 	TestRunner(GoldCode gc, TestSuite ts, List<Mutant> mts){
 		this.goldCode = gc;
 		this.testSuite = ts;
@@ -66,7 +106,7 @@ class TestRunner {
 	
 	void RunTest() {
         String sourceFilePathTc = testSuite.getSourceDirectoryString();
-        String sourceFilePathGc = goldCode.getSourceDirectoryString();
+        String sourceFilePathGc = goldCode.getSourceRootDirectoryString();
         
         if (compileProgram(sourceFilePathTc) != 0) {
             System.out.println("Compilation Failed");
@@ -80,7 +120,6 @@ class TestRunner {
 			try {
 	            int result = 0; //Result of compiling code
 	        } catch ( Exception e ) {
-	        
 	        }
 	}
 }

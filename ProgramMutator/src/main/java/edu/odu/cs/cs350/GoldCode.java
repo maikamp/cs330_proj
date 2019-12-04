@@ -21,8 +21,8 @@ storeGoldCode(Configuration c)
  */
 class GoldCode {
 	
-	private String sourceDirectoryString;
-	private File sourceDirectory;
+	private String sourceRootDirectoryString;
+	private File sourceRootDirectory;
 	private List<CompilationUnit> sourceCode;
 	private JavaParser jParser;
 	
@@ -32,8 +32,8 @@ class GoldCode {
 	}
 	
 	GoldCode(String path){
-		sourceDirectoryString = path;
-		sourceDirectory = new File(path);
+		sourceRootDirectoryString = path;
+		sourceRootDirectory = new File(path);
 		jParser = new JavaParser();
 		sourceCode = new ArrayList<CompilationUnit>();
 		try {
@@ -61,26 +61,36 @@ class GoldCode {
 }
 	
 
-	void setSourceDirectory(String path) {
-		sourceDirectory = new File(path);
+	void setSourceRootDirectory(String path) {
+		sourceRootDirectory = new File(path);
 	}
 	
-	File getSourceDirectory() {
+	File getSourceRootDirectory() {
 		
-		return this.sourceDirectory;
+		return this.sourceRootDirectory;
 	}
 	
-	String getSourceDirectoryString() {
+	String getSourceRootDirectoryString() {
 		
-		return this.sourceDirectoryString;
+		return this.sourceRootDirectoryString;
+	}
+	
+	String[] getPathStrings() {
+		
+		int max = this.sourceCode.size();
+		String[] result = new String[max];
+		for(int i=0; i<max; i++) {
+			result[i] = this.sourceCode.get(i).getStorage().get().getPath().toString();
+		}
+		return result;
 	}
 	
 	List<CompilationUnit> loadSourceCode() throws IOException {
-		if(!sourceDirectory.exists()) {
-			String message = "Error: No directory found at '" + sourceDirectory.toString()+ "'";
+		if(!sourceRootDirectory.exists()) {
+			String message = "Error: No directory found at '" + sourceRootDirectory.toString()+ "'";
 			throw new IOException(message);
 		}
-		Path start = sourceDirectory.toPath();
+		Path start = sourceRootDirectory.toPath();
 		 try {
 			Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
 			     @Override
