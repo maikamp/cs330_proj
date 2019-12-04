@@ -9,7 +9,7 @@ build-job:
     - green4
   stage: build
   script:
-    - cd ./ProgramMutator/
-    - #./gradlew build
+    - cd ProgramMutator/
+    - ./gradlew build Mutation.jar
   only:
     - master
