@@ -33,7 +33,7 @@ dependencies {
 }
 
 jar {
-    baseName = 'ProgramMutator'
+    baseName = 'Mutation'
 }
 
 test {
