@@ -30,9 +30,7 @@ public class TestMutationTestState {
 		x.alive = new ArrayList<Mutant> a();
 		y.alive = new ArrayList<Mutant> b();
 		assertEquals(a,b);
-		
-		
-		
+
 	}
 	
 	@Test
