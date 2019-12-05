@@ -116,6 +116,7 @@ jacocoTestReport {
 
 // Check Style Config
 checkstyle {
+	toolVersion = "7.6.1"
 	ignoreFailures = true
 	showViolations = false
 }
