@@ -1,7 +1,6 @@
 stages:
   - build
-  - test
-  - deploy
+  #- deploy
 
 
 build-job:
@@ -10,6 +9,17 @@ build-job:
   stage: build
   script:
     - cd ProgramMutator/
-    - ./gradlew build Mutation.jar
+    - chmod a+x gradlew
+    - ./gradlew --no-daemon build javadoc
   only:
     - master
+  artifacts:
+    paths:
+      - ./build
+
+#deploy-job:
+  #tags:
+    #- green4
+  #stage: deploy
+  #script:
+  
