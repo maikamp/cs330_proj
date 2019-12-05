@@ -11,6 +11,13 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 //apply plugin: 'org.ysb33r.doxygen'
 
+apply plugin: 'jacoco'
+
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+apply plugin: 'checkstyle'
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
