@@ -66,7 +66,7 @@ class MutationTestState {
 		System.out.println("Success Rate:\n" + liveMuts + " of " + allMuts + " are still alive."
 				+ "\nThe given tests only successfully removed " + rate + "% of the viable mutants.");
 	}
-	//generate mutation test state output as json
+	//generate mutation test state output as gson, will need to call toJson(this object) to convert for json output
 	Gson getTestState()
 	{
 		return this.state;
