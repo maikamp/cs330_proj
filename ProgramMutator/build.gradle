@@ -12,6 +12,10 @@ buildscript {
         }
 }
 
+// Add report task imports
+import edu.odu.cs.zeil.report_accumulator.ReportStats
+import edu.odu.cs.zeil.report_accumulator.ReportDeploy
+
 apply plugin: "org.hidetake.ssh"
 
 apply plugin: 'java'
@@ -145,3 +149,13 @@ tasks.withType(Checkstyle) {
 }
 checkstyleTest.enabled = false
 // End Checkstyle config
+
+//statistics collection and reporting tasks
+task collectStats (type: ReportStats, dependsOn: "build") {
+	reportsURL = "http://www.cs.odu.edu/~mcampbel/cs350/Mutation/statistics/"
+}
+
+task report (type: ReportsDeploy, dependsOn: "collectStats") {
+	deployDestination = "/home/mcampbel/public_html/cs350/Mutation/statistics"
+}
+
