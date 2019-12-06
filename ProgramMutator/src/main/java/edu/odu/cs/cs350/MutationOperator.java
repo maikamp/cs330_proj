@@ -1,6 +1,6 @@
 package edu.odu.cs.cs350;
 
-import java.util.List;
+import java.util.*;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -18,7 +18,7 @@ class MutationOperator {
 	MutationOperator(){
 		this.AlterableMutant = "";
 		this.AlterMutant = "";
-		this.codeToModify = <>;
+		this.codeToModify = new ArrayList<CompilationUnit> ();
 	}
 	//Receives Code and what needs to be changed.
 	//
