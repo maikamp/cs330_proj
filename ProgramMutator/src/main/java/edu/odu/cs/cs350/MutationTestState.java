@@ -2,17 +2,21 @@ package edu.odu.cs.cs350;
 
 import java.util.*;
 
+import com.google.gson.Gson;
+
 class MutationTestState {
 
 	List<Mutant> alive;
 	List<Mutant> dead;
 	List<Mutant> allMutants;
+	Gson state;
 	
 	MutationTestState() //create blank mutation test state object
 	{
 		this.alive = new ArrayList<Mutant> ();
 		this.dead = new ArrayList<Mutant> ();
 		this.allMutants = new ArrayList<Mutant> ();
+		this.state = new Gson();
 	}
 	Mutant getMutantByID(int mID)
 	{
@@ -63,9 +67,9 @@ class MutationTestState {
 				+ "\nThe given tests only successfully removed " + rate + "% of the viable mutants.");
 	}
 	//generate mutation test state output as json
-	void outputTestState()
+	Gson getTestState()
 	{
-		
+		return this.state;
 	}
 }
 
