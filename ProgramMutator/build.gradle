@@ -126,9 +126,10 @@ jacocoTestReport {
 
 // Check Style Config
 checkstyle {
-	toolVersion = "8.6"
+	toolVersion = "8.27"
 	ignoreFailures = true
 	showViolations = false
+	classpath "
 }
 
 tasks.withType(Checkstyle) {
