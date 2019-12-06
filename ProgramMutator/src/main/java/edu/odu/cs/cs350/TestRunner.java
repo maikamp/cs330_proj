@@ -1,8 +1,11 @@
 package edu.odu.cs.cs350;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,16 +108,72 @@ class TestRunner {
 	}
 	
 	void RunTest() {
+		/**
+		 * Get folder containing codes Gold Code 
+		 * Get folder containing codes Test Suite
+		 */
         String sourceFilePathTc = testSuite.getSourceDirectoryString();
         String sourceFilePathGc = goldCode.getSourceRootDirectoryString();
+		/**
+		 * Get files in GoldCode Path
+		 * Get files in TestSuite Path
+		 */
+        File goldCodeFolder  = new File(sourceFilePathGc);
+        File testCodeFolder  = new File(sourceFilePathTc);
+        /**
+         * Obtains list of files from each directory
+         */
+        File[] listOfGCFiles = goldCodeFolder.listFiles();
+        File[] listOfTSFiles = testCodeFolder.listFiles();
         
-        if (compileProgram(sourceFilePathTc) != 0) {
-            System.out.println("Compilation Failed");
-            System.exit(1);
-        }
-
-        System.out.printf("Compilation Succeeded for %s%n",
-                          getAbsolutePath(sourceFilePathTc));
+        /**
+         * Checks that each file compiles without errors
+         * if fail: send error message and exit program
+         */
+        //Test Gold Code files
+        for (int i = 0; i < listOfGCFiles.length; i++) {
+        	  if (listOfGCFiles[i].isFile()) {
+        		  if (compileProgram(listOfGCFiles[i].getPath()) != 0) {
+        	            System.out.println("Compilation Failed for file: " +listOfGCFiles[i].getName());
+        	            System.out.println("Please fix and try again");
+        	            System.exit(1);
+        	        }
+        	  } 
+        	}
+      //Test Test Suite files
+        for (int i = 0; i < listOfTSFiles.length; i++) {
+      	  if (listOfTSFiles[i].isFile()) {
+      		  if (compileProgram(listOfTSFiles[i].getPath()) != 0) {
+      	            System.out.println("Compilation Failed for file: " +listOfTSFiles[i].getName());
+      	            System.out.println("Please fix and try again");
+      	            System.exit(1);
+      	        }
+      	  } 
+      	}
+        System.out.printf("Compilation Succeeded proceeding with test...");
+        
+        //Begin Mutation test
+        /**
+         * 1. Get file from path
+         * 2. Generate Mutation test based on source code
+         * 3. Replace source code with new mutation test
+         * 4. Compile and run new code (if it passes its a failure, JUNIT test fail when modified as modified code should NOT pass all test) 
+         */
+        for (int i = 0; i < listOfTSFiles.length; i++) {
+        	  if (listOfTSFiles[i].isFile()) {
+        		  try {
+        			 String strPath = listOfTSFiles[i].getPath();
+        		     String contents = new String(Files.readAllBytes(Paths.get(strPath)));
+        		     
+        		     MutationGenerator mutantGen = new MutationGenerator(.getPath());
+        		    } catch (IOException e) {
+        		    	
+        		      e.printStackTrace();
+        		      
+        		    }
+        		  
+        	  } 
+        	}
 	}
 	void TestCase(Mutant workingSetA) {
 			try {
