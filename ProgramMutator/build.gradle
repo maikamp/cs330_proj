@@ -9,24 +9,23 @@ buildscript {
         classpath 'org.ysb33r.gradle:doxygen:0.2'
         classpath "org.hidetake:gradle-ssh-plugin:2.5.0+"
         classpath "edu.odu.cs.zeil:report_accumulator:1.2+"
-        }
+	}
 }
 
 // Add report task imports
 import edu.odu.cs.zeil.report_accumulator.ReportStats
-import edu.odu.cs.zeil.report_accumulator.ReportDeploy
+import edu.odu.cs.zeil.report_accumulator.ReportsDeploy
 
-apply plugin: "org.hidetake.ssh"
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.ysb33r.doxygen'
 
+apply plugin: "org.hidetake.ssh"
 apply plugin: 'jacoco'
-
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
-
 apply plugin: 'checkstyle'
 
 sourceCompatibility = 1.8
@@ -158,4 +157,4 @@ task collectStats (type: ReportStats, dependsOn: "build") {
 task report (type: ReportsDeploy, dependsOn: "collectStats") {
 	deployDestination = "/home/mcampbel/public_html/cs350/Mutation/statistics"
 }
-
+//end statistics collection and reporting tasks
