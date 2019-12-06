@@ -113,7 +113,7 @@ class TestRunner {
 		 * Get folder containing codes Test Suite
 		 */
         String sourceFilePathTc = testSuite.getSourceDirectoryString();
-        String sourceFilePathGc = goldCode.getSourceRootDirectoryString();
+        String sourceFilePathGc = goldCode.getSourceDirectory().toString();
 		/**
 		 * Get files in GoldCode Path
 		 * Get files in TestSuite Path
