@@ -127,10 +127,13 @@ jacocoTestReport {
 // Check Style Config
 checkstyle {
 	toolVersion = "8.27"
+	configFile file("config/checkstyle/checkstyle.xml")
 	ignoreFailures = true
 	showViolations = false
 }
-
+checkstyleMain {
+    source ='src/main/java'
+}
 tasks.withType(Checkstyle) {
 	reports {
 		html.destination project.file("build/reports/checkstyle/main.html")
