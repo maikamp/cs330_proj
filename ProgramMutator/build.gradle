@@ -129,7 +129,6 @@ checkstyle {
 	toolVersion = "8.27"
 	ignoreFailures = true
 	showViolations = false
-	classpath "
 }
 
 tasks.withType(Checkstyle) {
