@@ -13,6 +13,13 @@ class MutationOperator {
 	private String AlterableMutant;
 	private String AlterMutant;
 	
+	
+	//Default constructor 
+	MutationOperator(){
+		this.AlterableMutant = "";
+		this.AlterMutant = "";
+		this.codeToModify = <>;
+	}
 	//Receives Code and what needs to be changed.
 	//
 	MutationOperator(List<CompilationUnit> code, String MutantToChange){
