@@ -62,5 +62,10 @@ class MutationTestState {
 		System.out.println("Success Rate:\n" + liveMuts + " of " + allMuts + " are still alive."
 				+ "\nThe given tests only successfully removed " + rate + "% of the viable mutants.");
 	}
+	//generate mutation test state output as json
+	void outputTestState()
+	{
+		
+	}
 }
 

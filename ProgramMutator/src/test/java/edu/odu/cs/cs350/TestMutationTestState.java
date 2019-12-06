@@ -38,7 +38,7 @@ public class TestMutationTestState {
 		x.allMutants.add(m1);
 		x.allMutants.add(m2);
 		
-		//check that the arrays are different now that alive added 2 elements
+		//check that the arrays are different with added elements
 		assertThat(x.alive, is(not(x.dead)));
 		
 		//check the size of each array
