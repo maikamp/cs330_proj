@@ -44,6 +44,8 @@ class MutationGenerator {
 			}
 		}
 		
+		// Displays the array of mutants generated 
+		
 		String showArrayGenerated() {
 			String nums = "";
 			for (int i=0; i<mutantArray.length; i++) {

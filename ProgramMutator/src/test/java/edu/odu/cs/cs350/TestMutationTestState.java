@@ -27,6 +27,14 @@ public class TestMutationTestState {
 	@Test
 	public void testConstructor()
 	{
+<<<<<<< HEAD
+		x = new MutationTestState();
+		y = new MutationTestState();
+		x.alive = new ArrayList<Mutant> a();
+		y.alive = new ArrayList<Mutant> b();
+		assertEquals(a,b);
+
+=======
 
 		//check that all the member arrays start empty
 		assertThat(x.alive.size(),is(0));
@@ -45,6 +53,7 @@ public class TestMutationTestState {
 		assertThat(x.alive.size(), is(1));
 		assertThat(x.dead.size(), is(1));
 		assertThat(x.allMutants.size(), is(2));
+>>>>>>> branch 'master' of git@forge350.cs.odu.edu:bdemerch/phase-2-4.git
 	}
 	
 	@Test
