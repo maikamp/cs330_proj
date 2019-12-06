@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Properties;
 
-//...I'm just now realizing that this design doesn't make much sense. --BJD
 class Configuration {
 
 	/**
@@ -18,6 +17,7 @@ class Configuration {
 	 */
 	static void setToDefaultValues(Properties prop) {
 		prop.setProperty("gold-location", "src/main/java");
+		prop.setProperty("test-location", "src/test/java");
 		prop.setProperty("build-command", "compile");
 		prop.setProperty("state-location", "build/mutation");
 	}

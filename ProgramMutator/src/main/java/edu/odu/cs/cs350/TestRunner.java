@@ -106,7 +106,7 @@ class TestRunner {
 	
 	void RunTest() {
         String sourceFilePathTc = testSuite.getSourceDirectoryString();
-        String sourceFilePathGc = goldCode.getSourceRootDirectoryString();
+        String sourceFilePathGc = goldCode.getSourceDirectory().toString();
         
         if (compileProgram(sourceFilePathTc) != 0) {
             System.out.println("Compilation Failed");

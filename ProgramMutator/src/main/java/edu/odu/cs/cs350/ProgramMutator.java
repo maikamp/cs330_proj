@@ -13,7 +13,7 @@ import org.apache.commons.cli.ParseException;
 public class ProgramMutator {
 
 	
-	  static final String DEMOPATH = "E:\\Documents\\Eclipse\\Example-2";
+	  //static final String DEMOPATH = "E:\\Documents\\Eclipse\\Sample";
 	
 	  public static void main(String[] args) {
 
@@ -21,44 +21,46 @@ public class ProgramMutator {
 			Options options = createOptions();
 			CommandLineParser parser = new DefaultParser();
 			Properties config = new Properties();
-
+			
 		    try {
 		     	CommandLine cmd = parser.parse(options, args);
-		     	String dirPath = cmd.getArgs()[0];
-		     	String dirPathTest = dirPath + "/src/test/java";
-			    if (!Configuration.setToConfigFileValues(config, dirPath)) {
-			    	Configuration.setToDefaultValues(config);	
+		     	
+		     	String rootPath = cmd.getArgs()[0];
+		     	
+			    if (!Configuration.setToConfigFileValues(config, rootPath)) {
+			    	Configuration.setToDefaultValues(config);
+			    	// Ideally there'd be some logging here but w/e
+			    	// vvv NOT for production! vvv
+			    		// Configuration.cleanConfigurationFile(dirPath); 	
 			    }
-			    //System.err.println(config);
-			   
+
 			    MutationTestState state = new MutationTestState();
-			    
+			   
 			    if( cmd.hasOption( "describe" ) ) {
-			    	System.out.println( state.getMutantByID(Integer.parseInt(cmd.getOptionValue( "describe" ))));			    	
+			    	System.out.println( state.getMutantByID(Integer.parseInt(cmd.getOptionValue( "describe" ))));
 			    }
 			    if( cmd.hasOption( "list" ) ) {
 			       state.printLiveMutants();
 			    }
 			    
-			    //Get gold code
-			    GoldCode goldCode = new GoldCode(dirPath);
+			    GoldCode goldCode = new GoldCode(rootPath + "\\" + config.getProperty("gold-location"));
+			    TestSuite testCode = new TestSuite(rootPath + "\\" + config.getProperty("test-location"));
+			    
 			    System.out.println("Gold Files: " + goldCode.getSourceCode().size());
-			    //Get test code
-			    TestSuite testCode = new TestSuite(dirPathTest);
 			    System.out.println("TestSuite Files: " + testCode.getSourceCode().size());
+			    
+			    /*
 			    //Generate Mutants for Testing
-			    MutationGenerator GeneratedMutants = new MutationGenerator();
-			    System.out.println("Generated Mutations: " + GeneratedMutants.showArrayGenerated());
+			   MutationGenerator GeneratedMutants = new MutationGenerator();
+			   System.out.println("Generated Mutations: " + GeneratedMutants.showArrayGenerated());
 			    //Put all Mutants into MutationOperator
 			    //Run Tests
-			    //
+			    */
 			    
 			    
 		    } catch (ArrayIndexOutOfBoundsException e) {
 		    	System.out.println("<name> : Missing operand");
 				System.out.println("Try '<name> --help' for more information.");
-		    } catch(IndexOutOfBoundsException e) {
-		    	System.out.println("Invalid mutant ID");
 		    }
 		    catch (ParseException e) {
 		        System.err.println(e);
@@ -87,11 +89,6 @@ public class ProgramMutator {
 		    
 		    return options;
 		}
-
-		
-		
-		
-	
 
 	  }
 

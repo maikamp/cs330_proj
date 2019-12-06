@@ -21,8 +21,7 @@ storeGoldCode(Configuration c)
  */
 class GoldCode {
 	
-	private String sourceRootDirectoryString;
-	private File sourceRootDirectory;
+	private File sourceDirectory;
 	private List<CompilationUnit> sourceCode;
 	private JavaParser jParser;
 	
@@ -32,8 +31,7 @@ class GoldCode {
 	}
 	
 	GoldCode(String path){
-		sourceRootDirectoryString = path;
-		sourceRootDirectory = new File(path);
+		sourceDirectory = new File(path);
 		jParser = new JavaParser();
 		sourceCode = new ArrayList<CompilationUnit>();
 		try {
@@ -45,13 +43,16 @@ class GoldCode {
 	}
 	
 	
+
 	/**
+	 * Adds a file to the gold source code
+	 * @param filePath path to the file to be added
 	 */
-	void addToSourceCode(Path file) {
+	void add(Path filePath) {
 		
 		ParseResult<CompilationUnit> parseUnit;
 		try {
-			parseUnit = jParser.parse(file);
+			parseUnit = jParser.parse(filePath);
 			if (parseUnit.isSuccessful()) {
 				sourceCode.add(parseUnit.getResult().get());
 			}
@@ -59,22 +60,33 @@ class GoldCode {
 			System.err.println(e);
 		}
 }
-	
-
-	void setSourceRootDirectory(String path) {
-		sourceRootDirectory = new File(path);
+	/**
+	 * @return list of CompilationUnits
+	 */
+	List<CompilationUnit> getSourceCode(){
+		return this.sourceCode;
 	}
 	
-	File getSourceRootDirectory() {
+	/**
+	 * Sets the source root directory.
+	 *
+	 * @param path the new source root directory
+	 */
+	void setSourceDirectory(String path) {
+		sourceDirectory = new File(path);
+	}
+	
+	/**
+	 * @return File representing root directory of source code
+	 */
+	File getSourceDirectory() {
 		
-		return this.sourceRootDirectory;
+		return this.sourceDirectory;
 	}
 	
-	String getSourceRootDirectoryString() {
-		
-		return this.sourceRootDirectoryString;
-	}
-	
+	/**
+	 * @return Array of string representations of paths to compilation units
+	 */
 	String[] getPathStrings() {
 		
 		int max = this.sourceCode.size();
@@ -85,19 +97,25 @@ class GoldCode {
 		return result;
 	}
 	
+	/**
+	 * Load source code.
+	 *
+	 * @return the list
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	List<CompilationUnit> loadSourceCode() throws IOException {
-		if(!sourceRootDirectory.exists()) {
-			String message = "Error: No directory found at '" + sourceRootDirectory.toString()+ "'";
+		if(!sourceDirectory.exists()) {
+			String message = "Error: No directory found at '" + sourceDirectory.toString()+ "'";
 			throw new IOException(message);
 		}
-		Path start = sourceRootDirectory.toPath();
+		Path start = sourceDirectory.toPath();
 		 try {
 			Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
 			     @Override
 			     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
 			         throws IOException
 			     {
-			    	 addToSourceCode(file);
+			    	 add(file);
 			         return FileVisitResult.CONTINUE;
 			     }
 			     @Override
@@ -121,9 +139,6 @@ class GoldCode {
 		return sourceCode;
 	}
 	
-	List<CompilationUnit> getSourceCode(){
-		return this.sourceCode;
-	}
 }
 
 
