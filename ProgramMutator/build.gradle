@@ -133,10 +133,10 @@ checkstyle {
 	showViolations = false
 }
 checkstyleMain {
-    source ='src/main/java'
+    source ='ProgramMutator/src/main/java'
 }
 checkstyleTest {
-    source ='src/test/java'
+    source ='ProgramMutator/src/test/java'
 }
 tasks.withType(Checkstyle) {
 	reports {
