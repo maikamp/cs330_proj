@@ -7,9 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
 
 class TestRunner {
@@ -72,7 +74,11 @@ class TestRunner {
      */
     public static int compileProgram(String[] filePaths) {
 
-        return compileProgram(filePaths, null, null);
+        if(!compileAll("", filePaths, null, null)) {
+        	return 1;
+        }
+        
+        return 0;
     }
 
     /**
@@ -85,21 +91,27 @@ class TestRunner {
      *
      * @return 0 if compilation was successful, not 0 on failure
      */
-    public static int compileProgram( String[] pathStrings, OutputStream outStream,
+    static boolean compileAll( String destRoot, String[] pathStrings, OutputStream outStream,
     		OutputStream errStream)
     {
+		//modified from:
+		//https://stackoverflow.com/questions/9665768/javacompiler-set-the-compiled-class-output-folder
+
     		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
     		
-    		int result = 
-    				compiler.run(
-    						null,
-    						outStream,
-    						errStream,
-    						pathStrings);
+    		//temporary processing to avoid altering public interface
+    		Iterable<String> options = null;
+    		if(destRoot !="") {
+    		options = Arrays.asList( new String[] { "-d", destRoot} );
+    		}
     		
-    		return result;
+    		Iterable<? extends JavaFileObject> compUnits1 =  compiler.getStandardFileManager(null, null, null)
+    				.getJavaFileObjectsFromStrings(Arrays.asList(pathStrings));
+    		
+    		
+    		return compiler.getTask(null, null, null, options, null, compUnits1).call();
     	}
-	
+	   
     
 	TestRunner(GoldCode gc, TestSuite ts, List<Mutant> mts){
 		this.goldCode = gc;

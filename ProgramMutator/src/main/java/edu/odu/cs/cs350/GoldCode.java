@@ -97,6 +97,16 @@ class GoldCode {
 		return result;
 	}
 	
+	Path[] getPaths() {
+		
+		int max = this.sourceCode.size();
+		Path[] result = new Path[max];
+		for(int i=0; i<max; i++) {
+			result[i] = this.sourceCode.get(i).getStorage().get().getPath();
+		}
+		return result;
+	}
+	
 	/**
 	 * Load source code.
 	 *

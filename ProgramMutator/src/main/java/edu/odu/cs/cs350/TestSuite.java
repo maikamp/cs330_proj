@@ -55,7 +55,22 @@ class TestSuite {
 		}
 }
 	
-
+	/**
+	 * @return Array of string representations of paths to compilation units
+	 */
+	String[] getPathStrings() {
+		
+		int max = this.testCode.size();
+		String[] result = new String[max];
+		for(int i=0; i<max; i++) {
+			result[i] = this.testCode.get(i).getStorage().get().getPath().toString();
+		}
+		return result;
+	}
+	
+	
+	
+	
 	void setSourceDirectory(String path) {
 		sourceDirectory = new File(path);
 	}
