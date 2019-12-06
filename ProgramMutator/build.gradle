@@ -134,6 +134,9 @@ checkstyle {
 checkstyleMain {
     source ='src/main/java'
 }
+checkstyleTest {
+    source ='src/test/java'
+}
 tasks.withType(Checkstyle) {
 	reports {
 		html.destination project.file("build/reports/checkstyle/main.html")
