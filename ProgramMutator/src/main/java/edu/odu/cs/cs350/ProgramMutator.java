@@ -9,6 +9,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 //import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class ProgramMutator {
 
@@ -30,8 +31,7 @@ public class ProgramMutator {
 			    if (!Configuration.setToConfigFileValues(config, rootPath)) {
 			    	Configuration.setToDefaultValues(config);
 			    	// Ideally there'd be some logging here but w/e
-			    	// vvv NOT for production! vvv
-			    		// Configuration.cleanConfigurationFile(dirPath); 	
+			    	// Configuration.cleanConfigurationFile(dirPath); 	
 			    }
 
 			    MutationTestState state = new MutationTestState();
@@ -43,12 +43,29 @@ public class ProgramMutator {
 			       state.printLiveMutants();
 			    }
 			    
+			    String buildRoot = rootPath + "\\" + config.getProperty("state-location");
+			    state.store(buildRoot);
+			    
 			    GoldCode goldCode = new GoldCode(rootPath + "\\" + config.getProperty("gold-location"));
 			    TestSuite testCode = new TestSuite(rootPath + "\\" + config.getProperty("test-location"));
+			   
 			    
 			    System.out.println("Gold Files: " + goldCode.getSourceCode().size());
 			    System.out.println("TestSuite Files: " + testCode.getSourceCode().size());
 			    
+			    
+			    String[] allPaths = ArrayUtils.addAll(goldCode.getPathStrings(), testCode.getPathStrings());
+			    
+				if(TestRunner.compileProgram(allPaths, buildRoot)!=0) {
+					System.out.println("initial compilation failed; terminating.");
+					System.exit(1);
+				}
+				
+				if(TestRunner.testGoldCode(buildRoot, testCode.getClasses())!=0) {
+					System.out.println("Gold code does not pass all tests; terminating.");
+					System.exit(1);
+					
+				}
 			    /*
 			    //Generate Mutants for Testing
 			   MutationGenerator GeneratedMutants = new MutationGenerator();

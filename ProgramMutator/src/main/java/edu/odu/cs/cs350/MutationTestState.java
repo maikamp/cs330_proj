@@ -1,5 +1,10 @@
 package edu.odu.cs.cs350;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.*;
 
 import com.google.gson.Gson;
@@ -71,5 +76,19 @@ class MutationTestState {
 	{
 		return this.state;
 	}
+	
+	boolean store(String dirPath) {
+		File path = new File(dirPath);
+		path.mkdirs();
+		try (FileWriter output = new FileWriter(dirPath + "/mutation.json")) {
+			//do stuff
+			output.close();
+			return true;
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+		return false;
+	}
+	
 }
 

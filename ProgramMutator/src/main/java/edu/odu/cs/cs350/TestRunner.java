@@ -3,6 +3,9 @@ package edu.odu.cs.cs350;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +16,13 @@ import java.util.List;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
+
+import org.apache.commons.lang3.StringUtils;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Request;
+import org.junit.runner.Result;
+
+import com.github.javaparser.ast.CompilationUnit;
 
 class TestRunner {
 	
@@ -73,8 +83,26 @@ class TestRunner {
      * @return 0 if compilation was successful, not 0 on failure
      */
     public static int compileProgram(String[] filePaths) {
+    	
+    	if(!compileAll("", filePaths, null, null)) {
+    		return 1;
+    	}
+    	
+    	return 0;
+    }
+    
+    /**
+     * Compile a list of Java source files.
+     *
+     * @param pathStrings array of String representations of
+     *  absolute paths to files to compile
+     *  @param destRoot 
+     *
+     * @return 0 if compilation was successful, not 0 on failure
+     */
+    public static int compileProgram(String[] filePaths, String destRoot) {
 
-        if(!compileAll("", filePaths, null, null)) {
+        if(!compileAll(destRoot, filePaths, null, null)) {
         	return 1;
         }
         
@@ -96,20 +124,17 @@ class TestRunner {
     {
 		//modified from:
 		//https://stackoverflow.com/questions/9665768/javacompiler-set-the-compiled-class-output-folder
-
+    	
     		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+    		String path = "E:\\Documents\\Eclipse\\Example-5\\src\\main\\java";
     		
-    		//temporary processing to avoid altering public interface
-    		Iterable<String> options = null;
-    		if(destRoot !="") {
-    		options = Arrays.asList( new String[] { "-d", destRoot} );
-    		}
+    		Iterable<String> options = Arrays.asList( new String[] { "-d", destRoot});
     		
-    		Iterable<? extends JavaFileObject> compUnits1 =  compiler.getStandardFileManager(null, null, null)
+    		Iterable<? extends JavaFileObject> compUnits =  compiler.getStandardFileManager(null, null, null)
     				.getJavaFileObjectsFromStrings(Arrays.asList(pathStrings));
     		
     		
-    		return compiler.getTask(null, null, null, options, null, compUnits1).call();
+    		return compiler.getTask(null, null, null, options, null, compUnits).call();
     	}
 	   
     
@@ -196,5 +221,35 @@ class TestRunner {
 	        } catch ( Exception e ) {
 	        }
 	}
+	
+	static int testGoldCode(String buildRoot, String[] classes) {
+		
+		//pretend this isn't here
+		try {
+			URL newURL = new URL("file:///"+buildRoot+"/");
+
+	        URLClassLoader classLoader = new URLClassLoader(new URL[]{newURL});
+	        
+	        for(String classname: classes) {
+	            Class<?> clazz = classLoader.loadClass(classname);
+
+				Request request = Request.aClass(clazz);
+		        Result result = new JUnitCore().run(request);
+		        if (!result.wasSuccessful()) {
+		        	return 1;
+		        }
+	        }
+	        return 0;
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+	  }
 }
 
