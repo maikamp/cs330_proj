@@ -21,16 +21,10 @@ class MutationGenerator {
 		int id;
 		int mutantArray[] = new int[100];
 		int arithmeticMutantArray[] = new int[100];
-		
+		TestRunner testEngine;
 		MutationGenerator(GoldCode gc){
 			sourceCode = gc;
-		}
-		
-		//Generates Arithmetic Operators:
-		//Uses a random number to pull a number from MutantArray 
-		//Which is used to select one of 5 operators
-		//And pushed into arithmeticMutantArray
-		
+		}		
 		void generateArithmeticOperator() {
 			int random = (int)(Math.random()*10);
 			String ArithmeticOps[] = {"+","-","*","/","%"};
@@ -39,9 +33,54 @@ class MutationGenerator {
 			code.add(compUnit);
 			MutationOperator Generator = new MutationOperator(code, ArithmeticOps[random].toString());
 			
+			CompilationUnit modifiedCode =  Generator.getAlteredCode();
 			
+			int result = testEngine.compileProgram(modifiedCode.toString());
+			
+			if(result == 0) {
+				//Compilation fail
+			}else{
+				//compilation success
+			}
 		}
 		
+		void generateVarOperator() {
+			int random = (int)(Math.random()*8);
+			String Ops[] = {"int","String","char","boolean","byte","short","long","float","double"};
+			List<CompilationUnit> code = new ArrayList<CompilationUnit>();
+			CompilationUnit compUnit = new CompilationUnit(sourceCode.toString());
+			code.add(compUnit);
+			MutationOperator Generator = new MutationOperator(code, Ops[random].toString());
+			
+			CompilationUnit modifiedCode =  Generator.getAlteredCode();
+			
+			int result = testEngine.compileProgram(modifiedCode.toString());
+			
+			if(result == 0) {
+				//Compilation fail
+			}else{
+				//compilation success
+			}
+		}
+		
+		void generateLogicalOperator() {
+			int random = (int)(Math.random()*8);
+			String Ops[] = {"|","&","^","!","||","&&","==","!="};
+			List<CompilationUnit> code = new ArrayList<CompilationUnit>();
+			CompilationUnit compUnit = new CompilationUnit(sourceCode.toString());
+			code.add(compUnit);
+			MutationOperator Generator = new MutationOperator(code, Ops[random].toString());
+			
+			CompilationUnit modifiedCode =  Generator.getAlteredCode();
+			
+			int result = testEngine.compileProgram(modifiedCode.toString());
+			
+			if(result == 0) {
+				//Compilation fail
+			}else{
+				//compilation success
+			}
+		}
 		//Generates Random Numbers Corresponding to Operators
 		
 		void generateMutants() {
