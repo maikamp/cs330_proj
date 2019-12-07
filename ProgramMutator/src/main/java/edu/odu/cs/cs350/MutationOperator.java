@@ -14,7 +14,7 @@ class MutationOperator {
 	private String AlterMutant;
 	
 	
-	//Default constructor for mutantoperator class
+	//Default constructor for mutant operator class
 	MutationOperator(){
 		this.AlterableMutant = "";
 		this.AlterMutant = "";

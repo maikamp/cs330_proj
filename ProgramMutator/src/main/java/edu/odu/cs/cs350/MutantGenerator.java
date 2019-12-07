@@ -18,9 +18,12 @@ class MutationGenerator {
 	 * added one in this class, but we can move it if it seems more appropriate elsewhere. -Mike
 	 */
 		GoldCode sourceCode;
+		MutationTestState stateControl = new MutationTestState();
+		
 		int id;
 		int mutantArray[] = new int[100];
 		int arithmeticMutantArray[] = new int[100];
+		
 		TestRunner testEngine;
 		MutationGenerator(GoldCode gc){
 			sourceCode = gc;
@@ -78,7 +81,7 @@ class MutationGenerator {
 			if(result == 0) {
 				//Compilation fail
 			}else{
-				//compilation succes
+				//compilation success
 			}
 		}
 		//Generates Random Numbers Corresponding to Operators

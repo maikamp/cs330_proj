@@ -9,13 +9,30 @@ import org.junit.Before;
 
 public class TestTestRunner {
 	
+	//Test compiles program success
 	@Before
-	public void TestGetFile()
+	public void TestGetFileS()
 	{
-		String url = "C:\\Users\\nhughes\\Downloads\\JUnit\\JUnit\\Example-3\\src\\test\\java\\edu\\odu\\cs\\cs350\\examples";
-		TestSuite testSubject = new TestSuite(url);
-		assertEquals("A", testSubject.getSourceDirectory().toString());
+		TestRunner testRun = new TestRunner();
+		
+		//Good file path
+		String sourceFilePath = "";
+		
+		int result = testRun.compileProgram(sourceFilePath);
+		
+		assertEquals(1, result);
 	}
-	
-	
+	//Test compiles program fail
+	@Before
+	public void TestGetFileF()
+	{
+		TestRunner testRun = new TestRunner();
+		
+		//Bad file path
+		String sourceFilePath = "";
+		
+		int result = testRun.compileProgram(sourceFilePath);
+		
+		assertEquals(0, result);
+	}
 }
