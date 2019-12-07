@@ -11,6 +11,7 @@ build-job:
     - cd ProgramMutator/
     - chmod a+x gradlew
     - ./gradlew --no-daemon build javadoc
+    - ./gradlew --no-daemon collectStats
   only:
     - master
   artifacts:
@@ -22,9 +23,13 @@ deploy-job:
     - green4
   stage: deploy
   script:
-    - eval $(ssh-agent) -s)
+    - eval $(ssh-agent -s)
     - ssh-add <(echo "RSYNC_KEY")
-    - rsynch -auvz -e "ssh" build/directoriesToCopy mcampbel@atria.cs.odu.edu
+    #- rsynch -auvz -e "ssh" build/reports/findbugs mcampbel@atria.cs.odu.edu:./
+    - rsynch -auvz -e "ssh" build/reports/pmd mcampbel@atria.cs.odu.edu:./
+    - rsynch -auvz -e "ssh" build/reports/tests mcampbel@atria.cs.odu.edu:./
+    - rsynch -auvz -e "ssh" build/reports/*.csv mcampbel@atria.cs.odu.edu:./
+    - rsynch -auvz -e "ssh" build/reports/checkstyle mcampbel@atria.cs.odu.edu:./
     - ssh-agent -k
     - echo "--------RSYNC PLACEHOLDER--------"
     - ls -lah
