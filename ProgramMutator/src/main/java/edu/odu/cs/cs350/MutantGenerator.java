@@ -1,5 +1,10 @@
 package edu.odu.cs.cs350;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.github.javaparser.ast.CompilationUnit;
+
 class MutationGenerator {
 	/**
 	 * getArthmeticOperator() -> Collection
@@ -12,27 +17,70 @@ class MutationGenerator {
 	 * looks like we need an ADT for mutations in order to hold them in a collection. I've 
 	 * added one in this class, but we can move it if it seems more appropriate elsewhere. -Mike
 	 */
+		GoldCode sourceCode;
 		int id;
 		int mutantArray[] = new int[100];
 		int arithmeticMutantArray[] = new int[100];
-		
-		MutationGenerator(){
-			generateMutants();
-		}
-		
-		//Generates Arithmetic Operators:
-		//Uses a random number to pull a number from MutantArray 
-		//Which is used to select one of 5 operators
-		//And pushed into arithmeticMutantArray
-		
+		TestRunner testEngine;
+		MutationGenerator(GoldCode gc){
+			sourceCode = gc;
+		}		
 		void generateArithmeticOperator() {
-			for(int i = 0; i<100; i++) {
-				int random = (int)(Math.random()*100);
-				char ArithmeticOps[] = {'+','-','*','/','%','+','-','*','/','%'};
-				arithmeticMutantArray[i] = ArithmeticOps[mutantArray[random]];
+			int random = (int)(Math.random()*10);
+			String ArithmeticOps[] = {"+","-","*","/","%"};
+			List<CompilationUnit> code = new ArrayList<CompilationUnit>();
+			CompilationUnit compUnit = new CompilationUnit(sourceCode.toString());
+			code.add(compUnit);
+			MutationOperator Generator = new MutationOperator(code, ArithmeticOps[random].toString());
+			
+			CompilationUnit modifiedCode =  Generator.getAlteredCode();
+			
+			int result = testEngine.compileProgram(modifiedCode.toString());
+			
+			if(result == 0) {
+				//Compilation fail
+			}else{
+				//compilation success
 			}
 		}
 		
+		void generateVarOperator() {
+			int random = (int)(Math.random()*8);
+			String Ops[] = {"int","String","char","boolean","byte","short","long","float","double"};
+			List<CompilationUnit> code = new ArrayList<CompilationUnit>();
+			CompilationUnit compUnit = new CompilationUnit(sourceCode.toString());
+			code.add(compUnit);
+			MutationOperator Generator = new MutationOperator(code, Ops[random].toString());
+			
+			CompilationUnit modifiedCode =  Generator.getAlteredCode();
+			
+			int result = testEngine.compileProgram(modifiedCode.toString());
+			
+			if(result == 0) {
+				//Compilation fail
+			}else{
+				//compilation success
+			}
+		}
+		
+		void generateLogicalOperator() {
+			int random = (int)(Math.random()*8);
+			String Ops[] = {"|","&","^","!","||","&&","==","!="};
+			List<CompilationUnit> code = new ArrayList<CompilationUnit>();
+			CompilationUnit compUnit = new CompilationUnit(sourceCode.toString());
+			code.add(compUnit);
+			MutationOperator Generator = new MutationOperator(code, Ops[random].toString());
+			
+			CompilationUnit modifiedCode =  Generator.getAlteredCode();
+			
+			int result = testEngine.compileProgram(modifiedCode.toString());
+			
+			if(result == 0) {
+				//Compilation fail
+			}else{
+				//compilation succes
+			}
+		}
 		//Generates Random Numbers Corresponding to Operators
 		
 		void generateMutants() {
