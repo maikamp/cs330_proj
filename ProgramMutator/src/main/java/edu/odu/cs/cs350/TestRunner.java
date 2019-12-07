@@ -1,14 +1,11 @@
 package edu.odu.cs.cs350;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,12 +14,9 @@ import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.ToolProvider;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
 import org.junit.runner.Result;
-
-import com.github.javaparser.ast.CompilationUnit;
 
 class TestRunner {
 	
@@ -38,6 +32,12 @@ class TestRunner {
 
         return theFile.getAbsoluteFile().toPath();
     }
+    
+	TestRunner(GoldCode gc, TestSuite ts, List<Mutant> mts){
+		this.goldCode = gc;
+		this.testSuite = ts;
+		this.Mutations = mts;
+	}
 
     /**
      * Compile a single simple (single source file) Java program.
@@ -126,7 +126,6 @@ class TestRunner {
 		//https://stackoverflow.com/questions/9665768/javacompiler-set-the-compiled-class-output-folder
     	
     		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-    		String path = "E:\\Documents\\Eclipse\\Example-5\\src\\main\\java";
     		
     		Iterable<String> options = Arrays.asList( new String[] { "-d", destRoot});
     		
@@ -138,11 +137,6 @@ class TestRunner {
     	}
 	   
     
-	TestRunner(GoldCode gc, TestSuite ts, List<Mutant> mts){
-		this.goldCode = gc;
-		this.testSuite = ts;
-		this.Mutations = mts;
-	}
 	
 	void RunTest() {
 		/**
@@ -217,10 +211,11 @@ class TestRunner {
 	}
 	void TestCase(Mutant workingSetA) {
 			try {
-	            int result = 0; //Result of compiling code
+	         //   int result = 0; //Result of compiling code
 	        } catch ( Exception e ) {
 	        }
 	}
+	
 	
 	static int testGoldCode(String buildRoot, String[] classes) {
 		
@@ -243,11 +238,11 @@ class TestRunner {
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			return -1;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			return -1;
 		}
 	  }
