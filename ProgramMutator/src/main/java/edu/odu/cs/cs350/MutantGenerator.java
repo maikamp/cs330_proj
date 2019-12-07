@@ -78,7 +78,7 @@ class MutationGenerator {
 			if(result == 0) {
 				//Compilation fail
 			}else{
-				//compilation success
+				//compilation succes
 			}
 		}
 		//Generates Random Numbers Corresponding to Operators
