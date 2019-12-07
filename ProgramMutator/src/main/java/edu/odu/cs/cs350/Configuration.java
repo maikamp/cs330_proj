@@ -49,8 +49,7 @@ class Configuration {
 	}
 
 	/**
-	 * convenience method-- that is, my convenience. makes default config file.
-	 * --BJD
+	 * convenience method to make default config file.
 	 * 
 	 * @param path
 	 * @return

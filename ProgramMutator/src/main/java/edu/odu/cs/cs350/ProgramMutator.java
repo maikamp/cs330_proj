@@ -19,7 +19,24 @@ public class ProgramMutator {
 	  public static void main(String[] args) {
 
 
-			Options options = createOptions();
+			Options options = new Options();
+		    options.addOption("c", "cleanconfig", false, "reset the configuration file to default values");
+		    options.addOption("h", "help", false, "print this message");
+
+		    Option describe = Option.builder("d")
+		    		.longOpt("describe")
+		    		.desc("get a description of a mutant")
+		    		.hasArg()
+		    		.argName("mutantId")
+		    		.build();
+		    options.addOption(describe);
+		    
+		    Option list = Option.builder("l")
+		    		.longOpt("list")
+		    		.desc("list all live mutants")
+		    		.build();
+		    options.addOption(list);
+		    
 			CommandLineParser parser = new DefaultParser();
 			Properties config = new Properties();
 			
@@ -63,16 +80,8 @@ public class ProgramMutator {
 				
 				if(TestRunner.testGoldCode(buildRoot, testCode.getClasses())!=0) {
 					System.out.println("Gold code does not pass all tests; terminating.");
-					System.exit(1);
-					
+					System.exit(1);					
 				}
-			    /*
-			    //Generate Mutants for Testing
-			   MutationGenerator GeneratedMutants = new MutationGenerator();
-			   System.out.println("Generated Mutations: " + GeneratedMutants.showArrayGenerated());
-			    //Put all Mutants into MutationOperator
-			    //Run Tests
-			    */
 			    
 			    
 		    } catch (ArrayIndexOutOfBoundsException e) {
@@ -84,28 +93,6 @@ public class ProgramMutator {
 		    }
 		  }
 	  
-		static Options createOptions() {
-			
-			Options options = new Options();
-		    options.addOption("c", "cleanconfig", false, "reset the configuration file to default values");
-		    options.addOption("h", "help", false, "print this message");
-
-		    Option describe = Option.builder("d")
-		    		.longOpt("describe")
-		    		.desc("get a description of a mutant")
-		    		.hasArg()
-		    		.argName("mutantId")
-		    		.build();
-		    options.addOption(describe);
-		    
-		    Option list = Option.builder("l")
-		    		.longOpt("list")
-		    		.desc("list all live mutants")
-		    		.build();
-		    options.addOption(list);
-		    
-		    return options;
-		}
 
 	  }
 
