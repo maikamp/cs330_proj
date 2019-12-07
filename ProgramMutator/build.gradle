@@ -27,7 +27,7 @@ apply plugin: 'org.ysb33r.doxygen'
 apply plugin: "org.hidetake.ssh"
 
 apply plugin: 'jacoco'
-apply plugin: 'findbugs'
+//apply plugin: 'findbugs'
 apply plugin: 'pmd'
 apply plugin: 'checkstyle'
 
@@ -83,7 +83,7 @@ doxygen {
     outputDir new File(buildDir,'docs')
 }
 
-
+/*
 findbugsMain {
 	ignoreFailures true
 	reports {
@@ -92,7 +92,7 @@ findbugsMain {
 		
 	}
 }
-
+*/
 pmd {
 	ignoreFailures = true
 	ruleSets = [
