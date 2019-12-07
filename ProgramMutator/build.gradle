@@ -143,7 +143,7 @@ checkstyleTest {
 }
 tasks.withType(Checkstyle) {
 	reports {
-		html.destination project.file("http://www.cs.odu.edu/~mcampbel/cs350/Mutation/reports/CheckStyle")
+		html.destination project.file("build/reports/checkstyle/main.html")
 	}
 }
 checkstyleTest.enabled = false
