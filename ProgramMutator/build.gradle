@@ -18,7 +18,6 @@ import edu.odu.cs.zeil.report_accumulator.ReportStats
 import edu.odu.cs.zeil.report_accumulator.ReportsDeploy
 
 
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
