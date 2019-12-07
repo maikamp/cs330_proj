@@ -10,7 +10,7 @@ build-job:
   script:
     - cd ProgramMutator/
     - chmod a+x gradlew
-    - ./gradlew --no-daemon build javadoc
+    - ./gradlew --no-daemon build javadoc jacocoTestReport
     - ./gradlew --no-daemon collectStats
   only:
     - master
@@ -23,14 +23,7 @@ deploy-job:
     - green4
   stage: deploy
   script:
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "RSYNC_KEY")
-    #- rsynch -auvz -e "ssh" build/reports/findbugs mcampbel@atria.cs.odu.edu:./
-    - rsynch -auvz -e "ssh" build/reports/pmd mcampbel@atria.cs.odu.edu:./
-    - rsynch -auvz -e "ssh" build/reports/tests mcampbel@atria.cs.odu.edu:./
-    - rsynch -auvz -e "ssh" build/reports/*.csv mcampbel@atria.cs.odu.edu:./
-    - rsynch -auvz -e "ssh" build/reports/checkstyle mcampbel@atria.cs.odu.edu:./
-    - ssh-agent -k
+    # Print files available for debugging
     - echo "--------RSYNC PLACEHOLDER--------"
     - ls -lah
     - echo "----------------"
@@ -39,3 +32,7 @@ deploy-job:
     - ls -lah build/reports
     - echo "----------------"
     - ls -lah build/docs
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "RSYNC_KEY")
+    - rsynch -auvz -e "ssh" build/docs build/reports/ build/jacoco mcampbel@atria.cs.odu.edu:./
+    - ssh-agent -k
