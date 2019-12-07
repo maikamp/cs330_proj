@@ -21,10 +21,12 @@ class MutationGenerator {
 		MutationTestState stateControl = new MutationTestState();
 		
 		int id;
+		int last_result;
 		int mutantArray[] = new int[100];
 		int arithmeticMutantArray[] = new int[100];
 		
 		TestRunner testEngine;
+		
 		MutationGenerator(GoldCode gc){
 			sourceCode = gc;
 		}		
@@ -41,9 +43,9 @@ class MutationGenerator {
 			int result = testEngine.compileProgram(modifiedCode.toString());
 			
 			if(result == 0) {
-				//Compilation fail
+				last_result = 0;
 			}else{
-				//compilation success
+				last_result = 1;
 			}
 		}
 		
@@ -60,9 +62,9 @@ class MutationGenerator {
 			int result = testEngine.compileProgram(modifiedCode.toString());
 			
 			if(result == 0) {
-				//Compilation fail
+				last_result = 0;
 			}else{
-				//compilation success
+				last_result = 1;
 			}
 		}
 		
@@ -79,13 +81,15 @@ class MutationGenerator {
 			int result = testEngine.compileProgram(modifiedCode.toString());
 			
 			if(result == 0) {
-				//Compilation fail
+				last_result = 0;
 			}else{
-				//compilation success
+				last_result = 1;
 			}
 		}
 		//Generates Random Numbers Corresponding to Operators
-		
+		int getLastResult() {
+			return last_result;
+		}
 		void generateMutants() {
 			for (int i=0; i<100; i++) {
 				
