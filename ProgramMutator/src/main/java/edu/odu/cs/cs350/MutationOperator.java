@@ -12,7 +12,6 @@ class MutationOperator {
 	private List<CompilationUnit> codeToModify;
 	private String AlterableMutant;
 	private String AlterMutant;
-	private String operatorType; //this describes what change/mutation was applied to a mutant
 	
 	
 	//Default constructor for mutantoperator class
