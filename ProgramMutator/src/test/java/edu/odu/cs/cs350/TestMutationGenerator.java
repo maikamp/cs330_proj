@@ -14,9 +14,7 @@ import java.nio.file.Paths;
 import static org.hamcrest.Matchers.*;
 
 public class TestMutationGenerator {
-	
-	//Test compiles program success
-	
+		
 	@Before
 	public void TestGenerateMutantsArithS()
 	{
