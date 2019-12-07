@@ -7,6 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.ysb33r.gradle:doxygen:0.2'
+        
         classpath "org.hidetake:gradle-ssh-plugin:2.5.0+"
         classpath "edu.odu.cs.zeil:report_accumulator:1.2+"
 	}
@@ -20,9 +21,11 @@ import edu.odu.cs.zeil.report_accumulator.ReportsDeploy
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+
 apply plugin: 'org.ysb33r.doxygen'
 
 apply plugin: "org.hidetake.ssh"
+
 apply plugin: 'jacoco'
 //apply plugin: 'findbugs'
 apply plugin: 'pmd'
@@ -143,7 +146,7 @@ checkstyleTest {
 }
 tasks.withType(Checkstyle) {
 	reports {
-		html.destination project.file("/home/mcampbel/public_html/cs350/Mutation/reports/checkStyle.html")
+		html.destination project.file("build/reports/checkstyle/main.html")
 	}
 }
 checkstyleTest.enabled = false
