@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
@@ -68,8 +70,19 @@ class TestSuite {
 		return result;
 	}
 	
-	
-	
+	String[] getClasses() {
+		
+		int max = this.testCode.size();
+		String[] classes = new String[max];
+		
+		for(int i=0; i<max; i++) {
+			String packagedec = this.testCode.get(i).getPackageDeclaration().get().getName().asString();
+	      	String filename = this.testCode.get(i).getStorage().get().getFileName();
+	      	classes[i]= packagedec + "." +StringUtils.stripEnd(filename, ".java");
+		}
+	      return classes;	
+	}
+		
 	
 	void setSourceDirectory(String path) {
 		sourceDirectory = new File(path);
