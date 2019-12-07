@@ -62,7 +62,12 @@ class TestRunner {
     {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
-        int result = compiler.run(null, outStream, errStream, absolutePath);
+        int result = 
+        		compiler.run
+        		(null, 
+        				outStream, 
+        				errStream, 
+        				absolutePath);
 
         return result;
     }
@@ -118,11 +123,12 @@ class TestRunner {
     {
 		//modified from:
 		//https://stackoverflow.com/questions/9665768/javacompiler-set-the-compiled-class-output-folder
-    	
     		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-    		
-    		Iterable<String> options = Arrays.asList( new String[] { "-d", destRoot});
-    		
+    	
+    		Iterable<String> options = null;
+    		if(!destRoot.isEmpty()) {
+    			options = Arrays.asList( new String[] { "-d", destRoot});
+    		}
     		Iterable<? extends JavaFileObject> compUnits =  compiler.getStandardFileManager(null, null, null)
     				.getJavaFileObjectsFromStrings(Arrays.asList(pathStrings));
     		
@@ -138,9 +144,9 @@ class TestRunner {
      * @param outStream destination for all "standard out" output (uses default if null)
      * @param errStream destination for all "standard error" output (uses default if null)
      *
-     * @return 0 if compilation was successful, not 0 on failure
+     * @return 0 if all tests passed, not 0 on failure or failed test
      */
-	static int testGoldCode(String buildRoot, String[] classes) {
+	static int testGoldCode(String buildRoot, String[] classNames) {
 		
 		//pretend this isn't here
 		try {
@@ -148,16 +154,14 @@ class TestRunner {
 
 	        URLClassLoader classLoader = new URLClassLoader(new URL[]{newURL});
 	        
-	        for(String classname: classes) {
-	            Class<?> clazz = classLoader.loadClass(classname);
-
-				Request request = Request.aClass(clazz);
-		        Result result = new JUnitCore().run(request);
-		        if (!result.wasSuccessful()) {
-		        	return 1;
-		        }
+	        Class<?>[] theClasses = new Class<?>[classNames.length];
+	        for(int i=0; i<classNames.length; i++) {
+	            theClasses[i] = classLoader.loadClass(classNames[i]);
 	        }
-	        return 0;
+				Request request = Request.classes(theClasses);
+		        Result result = new JUnitCore().run(request);
+		       
+	        return result.getFailureCount();
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
