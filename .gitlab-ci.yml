@@ -24,14 +24,14 @@ deploy-job:
   stage: deploy
   script:
     # Print files available for debugging
-    - echo "--------RSYNC PLACEHOLDER--------"
-    - ls -lah
-    - echo "----------------"
-    - ls -lah build
-    - echo "----------------"
-    - ls -lah build/reports
-    - echo "----------------"
-    - ls -lah build/docs
+    #- echo "--------RSYNC PLACEHOLDER--------"
+    #- ls -lah
+    #- echo "----------------"
+    #- ls -lah build
+    #- echo "----------------"
+    #- ls -lah build/reports
+    #- echo "----------------"
+    #- ls -lah build/docs
     - eval $(ssh-agent -s)
     - ssh-add <(echo "RSYNC_KEY")
     - rsynch -auvz -e "ssh" build/docs build/reports/ build/jacoco mcampbel@atria.cs.odu.edu:./
