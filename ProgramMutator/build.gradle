@@ -7,6 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.ysb33r.gradle:doxygen:0.2'
+        
         classpath "org.hidetake:gradle-ssh-plugin:2.5.0+"
         classpath "edu.odu.cs.zeil:report_accumulator:1.2+"
 	}
@@ -20,11 +21,13 @@ import edu.odu.cs.zeil.report_accumulator.ReportsDeploy
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+
 apply plugin: 'org.ysb33r.doxygen'
 
 apply plugin: "org.hidetake.ssh"
+
 apply plugin: 'jacoco'
-apply plugin: 'findbugs'
+//apply plugin: 'findbugs'
 apply plugin: 'pmd'
 apply plugin: 'checkstyle'
 
@@ -80,7 +83,7 @@ doxygen {
     outputDir new File(buildDir,'docs')
 }
 
-
+/*
 findbugsMain {
 	ignoreFailures true
 	reports {
@@ -89,7 +92,7 @@ findbugsMain {
 		
 	}
 }
-
+*/
 pmd {
 	ignoreFailures = true
 	ruleSets = [
@@ -151,10 +154,10 @@ checkstyleTest.enabled = false
 
 //statistics collection and reporting tasks
 task collectStats (type: ReportStats, dependsOn: "build") {
-	reportsURL = "http://www.cs.odu.edu/~mcampbel/cs350/Mutation/reports/FindBugs"
+	reportsURL = "http://www.cs.odu.edu/~mcampbel/cs350/Mutation/reports"
 }
 
 task report (type: ReportsDeploy, dependsOn: "collectStats") {
-	deployDestination = "http://www.cs.odu.edu/~mcampbel/cs350/Mutation/reports/FindBugs"
+	deployDestination = "/home/mcampbel/public_html/cs350/Mutation/reports"
 }
 //end statistics collection and reporting tasks
