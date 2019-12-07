@@ -155,6 +155,6 @@ task collectStats (type: ReportStats, dependsOn: "build") {
 }
 
 task report (type: ReportsDeploy, dependsOn: "collectStats") {
-	deployDestination = "/build/directoriesToCopy"
+	deployDestination = "/home/mcampbel/public_html/cs350/Mutation/reports"
 }
 //end statistics collection and reporting tasks

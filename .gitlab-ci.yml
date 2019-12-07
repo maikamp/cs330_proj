@@ -22,10 +22,10 @@ deploy-job:
     - green4
   stage: deploy
   script:
-    - eval $(ssh-agent) -s
-    - ssh-add <(echo "RSYNC_KEY")
-    - rsynch -auvz -e "ssh" build/directoriesToCopy mcampbel@atria.cs.odu.edu
-    - ssh-agent -k
+    #- eval $(ssh-agent -s)
+    #- ssh-add <(echo "RSYNC_KEY")
+    #- rsynch -auvz -e "ssh" build/directoriesToCopy mcampbel@atria.cs.odu.edu
+    #- ssh-agent -k
     - echo "--------RSYNC PLACEHOLDER--------"
     - ls -lah
     - echo "----------------"
