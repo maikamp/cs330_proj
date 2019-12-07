@@ -42,8 +42,12 @@ public class ProgramMutator {
 			
 		    try {
 		     	CommandLine cmd = parser.parse(options, args);
-		     	
-		     	String rootPath = cmd.getArgs()[0];
+		     	String rootPath;
+		     	try {
+		     		rootPath = cmd.getArgs()[0];
+		     	} catch (ArrayIndexOutOfBoundsException e) {
+			    	rootPath = ".";
+			    }
 		     	
 			    if (!Configuration.setToConfigFileValues(config, rootPath)) {
 			    	Configuration.setToDefaultValues(config);
@@ -84,9 +88,6 @@ public class ProgramMutator {
 				}
 			    
 			    
-		    } catch (ArrayIndexOutOfBoundsException e) {
-		    	System.out.println("<name> : Missing operand");
-				System.out.println("Try '<name> --help' for more information.");
 		    }
 		    catch (ParseException e) {
 		        System.err.println(e);
