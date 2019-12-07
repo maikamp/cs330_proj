@@ -24,7 +24,7 @@ apply plugin: 'org.ysb33r.doxygen'
 
 apply plugin: "org.hidetake.ssh"
 apply plugin: 'jacoco'
-apply plugin: 'findbugs'
+//apply plugin: 'findbugs'
 apply plugin: 'pmd'
 apply plugin: 'checkstyle'
 
@@ -80,7 +80,7 @@ doxygen {
     outputDir new File(buildDir,'docs')
 }
 
-
+/*
 findbugsMain {
 	ignoreFailures true
 	reports {
@@ -89,7 +89,7 @@ findbugsMain {
 		
 	}
 }
-
+*/
 pmd {
 	ignoreFailures = true
 	ruleSets = [
@@ -143,7 +143,7 @@ checkstyleTest {
 }
 tasks.withType(Checkstyle) {
 	reports {
-		html.destination project.file("build/reports/checkstyle/main.html")
+		html.destination project.file("/home/mcampbel/public_html/cs350/Mutation/reports/checkStyle.html")
 	}
 }
 checkstyleTest.enabled = false
@@ -151,10 +151,10 @@ checkstyleTest.enabled = false
 
 //statistics collection and reporting tasks
 task collectStats (type: ReportStats, dependsOn: "build") {
-	reportsURL = "http://www.cs.odu.edu/~mcampbel/cs350/Mutation/reports/FindBugs"
+	reportsURL = "http://www.cs.odu.edu/~mcampbel/cs350/Mutation/reports"
 }
 
 task report (type: ReportsDeploy, dependsOn: "collectStats") {
-	deployDestination = "http://www.cs.odu.edu/~mcampbel/cs350/Mutation/reports/FindBugs"
+	deployDestination = "/build/directoriesToCopy"
 }
 //end statistics collection and reporting tasks
