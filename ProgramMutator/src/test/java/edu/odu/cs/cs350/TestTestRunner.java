@@ -14,7 +14,7 @@ public class TestTestRunner {
 	{
 		String url = "C:\\Users\\nhughes\\Downloads\\JUnit\\JUnit\\Example-3\\src\\test\\java\\edu\\odu\\cs\\cs350\\examples";
 		TestSuite testSubject = new TestSuite(url);
-		assertEquals("A", testSubject.getSourceDirectoryString());
+		assertEquals("A", testSubject.getSourceDirectory().toString());
 	}
 	
 	

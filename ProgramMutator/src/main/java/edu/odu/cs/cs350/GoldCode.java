@@ -30,6 +30,12 @@ class GoldCode {
 		jParser = new JavaParser();
 	}
 	
+	
+	/**
+	 * Instantiates a new test suite.
+	 *
+	 * @param path the path
+	 */
 	GoldCode(String path){
 		sourceDirectory = new File(path);
 		jParser = new JavaParser();
@@ -101,7 +107,7 @@ class GoldCode {
 	/**
 	 * Load source code.
 	 *
-	 * @return the list
+	 * @return the list of CompilationUnit objects
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	List<CompilationUnit> loadSourceCode() throws IOException {

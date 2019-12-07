@@ -18,7 +18,7 @@ import com.github.javaparser.ast.CompilationUnit;
 
 class TestSuite {
 	
-	private String sourceDirectoryString;
+	
 	private File sourceDirectory;
 	private List<CompilationUnit> testCode;
 	private JavaParser jParser;
@@ -28,8 +28,12 @@ class TestSuite {
 		jParser = new JavaParser();
 	}
 	
+	/**
+	 * Instantiates a new test suite.
+	 *
+	 * @param path the path
+	 */
 	TestSuite(String path){
-		sourceDirectoryString = path;
 		sourceDirectory = new File(path);
 		jParser = new JavaParser();
 		testCode = new ArrayList<CompilationUnit>();
@@ -43,6 +47,8 @@ class TestSuite {
 	
 	
 	/**
+	 * Adds a file to the test source code
+	 * @param filePath path to the file to be added
 	 */
 	void addToSourceCode(Path file) {
 		
@@ -70,6 +76,9 @@ class TestSuite {
 		return result;
 	}
 	
+	/**
+	 * @return Array of strings representing fully-qualified class names
+	 */
 	String[] getClasses() {
 		
 		int max = this.testCode.size();
@@ -83,21 +92,30 @@ class TestSuite {
 	      return classes;	
 	}
 		
-	
+	/**
+	 * Sets the source root directory.
+	 *
+	 * @param path the new source root directory
+	 */
 	void setSourceDirectory(String path) {
 		sourceDirectory = new File(path);
 	}
 	
+	/**
+	 * @return File representing root directory of source code
+	 */
 	File getSourceDirectory() {
 		
 		return this.sourceDirectory;
 	}
+
 	
-	String getSourceDirectoryString() {
-		
-		return this.sourceDirectoryString;
-	}
-	
+	/**
+	 * Load source code.
+	 *
+	 * @return the list of CompilationUnit objects
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	List<CompilationUnit> loadSourceCode() throws IOException {
 		if(!sourceDirectory.exists()) {
 			String message = "Error: No directory found at '" + sourceDirectory.toString()+ "'";
@@ -130,10 +148,12 @@ class TestSuite {
 			e.printStackTrace();
 		}
 		
-		
 		return testCode;
 	}
 	
+	/**
+	 * @return list of CompilationUnits
+	 */
 	List<CompilationUnit> getSourceCode(){
 		return this.testCode;
 	}
