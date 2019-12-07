@@ -1,12 +1,15 @@
 package edu.odu.cs.cs350;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.hasItemInArray;
+import static org.hamcrest.Matchers.stringContainsInOrder;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestGoldCode {
@@ -15,12 +18,6 @@ public class TestGoldCode {
 	GoldCode nullCode = new GoldCode();
 	String TESTPATH = "src/test/resources";
 	
-
-	@Before
-	public void setUp()
-	{
-		
-	}
 	
 	@Test
 	public void testGetSourceDirectory() {
